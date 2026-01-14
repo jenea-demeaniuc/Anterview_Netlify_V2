@@ -488,11 +488,18 @@
         function bootSystem() {
             playTone(100, 'sawtooth', 1.0);
             const tl = gsap.timeline();
+
+            // 1. Hide the Theme Dock
+            tl.to("#theme-dock", { opacity: 0, duration: 0.5, onComplete: () => {
+                document.getElementById('theme-dock').style.display = 'none';
+            }}, 0);
+
+            // 2. Hide Setup & Show Chat
             tl.to("#setup-view", { opacity: 0, scale: 0.9, duration: 0.5, onComplete: () => {
                 document.getElementById('setup-view').style.display = 'none';
                 document.getElementById('chat-view').classList.remove('hidden');
                 initInterview();
-            }})
+            }}, 0)
             .from("#chat-view", { opacity: 0, scale: 1.05, duration: 0.8 });
         }
 
