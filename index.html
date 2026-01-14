@@ -1,1037 +1,1039 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full w-full bg-black">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANTERVIEW | EVENT HORIZON [PRO]</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ANTERVIEW | EVENT HORIZON [PRO]</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@100;400;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@100;400;700;800&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --neon-cyan: #00f5ff;
-            --neon-pink: #ff0055;
-            --neon-amber: #ff9900;
-            --void: #030305;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.1);
-        }
+<style>
+:root {
+--neon-cyan: #00f5ff;
+--neon-pink: #ff0055;
+--neon-amber: #ff9900;
+--void: #030305;
+--glass: rgba(255, 255, 255, 0.03);
+--border: rgba(255, 255, 255, 0.1);
+}
 
-        body { font-family: 'Space Grotesk', sans-serif; background-color: var(--void); color: #fff; overflow: hidden; cursor: crosshair; transition: background-color 0.5s; }
-        .mono { font-family: 'JetBrains Mono', monospace; }
+body { font-family: 'Space Grotesk', sans-serif; background-color: var(--void); color: #fff; overflow: hidden; cursor: crosshair; transition: background-color 0.5s; }
+.mono { font-family: 'JetBrains Mono', monospace; }
 
-        .scanlines {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            background-size: 100% 2px, 3px 100%;
-            opacity: 0.6;
-            pointer-events: none;
-        }
+.scanlines {
+position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999;
+background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+background-size: 100% 2px, 3px 100%;
+opacity: 0.6;
+pointer-events: none;
+}
 
-        .glass-panel {
-            background: rgba(10, 11, 15, 0.85);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border);
-            box-shadow: 0 0 40px rgba(0, 245, 255, 0.05), inset 0 0 20px rgba(255,255,255,0.02);
-        }
+.glass-panel {
+background: rgba(10, 11, 15, 0.85);
+backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+border: 1px solid var(--border);
+box-shadow: 0 0 40px rgba(0, 245, 255, 0.05), inset 0 0 20px rgba(255,255,255,0.02);
+}
 
-        .sci-input {
-            width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border);
-            padding: 16px; border-radius: 4px; color: var(--neon-cyan);
-            font-family: 'JetBrains Mono', monospace; font-size: 14px; outline: none; transition: 0.3s;
-        }
-        .sci-input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 245, 255, 0.15); }
+.sci-input {
+width: 100%; background: rgba(0,0,0,0.4); border: 1px solid var(--border);
+padding: 16px; border-radius: 4px; color: var(--neon-cyan);
+font-family: 'JetBrains Mono', monospace; font-size: 14px; outline: none; transition: 0.3s;
+}
+.sci-input:focus { border-color: var(--neon-cyan); box-shadow: 0 0 15px rgba(0, 245, 255, 0.15); }
 
-        .sci-btn {
-            background: var(--neon-cyan); color: #000; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 2px; padding: 16px; border-radius: 4px; transition: 0.2s;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
-        }
-        .sci-btn:hover { background: #fff; box-shadow: 0 0 30px var(--neon-cyan); }
-        .sci-btn:active { transform: scale(0.98); }
+.sci-btn {
+background: var(--neon-cyan); color: #000; font-weight: 800; text-transform: uppercase;
+letter-spacing: 2px; padding: 16px; border-radius: 4px; transition: 0.2s;
+clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+}
+.sci-btn:hover { background: #fff; box-shadow: 0 0 30px var(--neon-cyan); }
+.sci-btn:active { transform: scale(0.98); }
 
-        .locked-option { opacity: 0.5; cursor: not-allowed; position: relative; border: 1px solid #333; }
-        .locked-badge { position: absolute; right: 10px; top: 10px; font-size: 9px; background: var(--neon-pink); color: white; padding: 2px 6px; border-radius: 2px; font-weight: bold; }
+.locked-option { opacity: 0.5; cursor: not-allowed; position: relative; border: 1px solid #333; }
+.locked-badge { position: absolute; right: 10px; top: 10px; font-size: 9px; background: var(--neon-pink); color: white; padding: 2px 6px; border-radius: 2px; font-weight: bold; }
 
-        .msg-enter { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
+.msg-enter { animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; transform: translateY(20px); }
+@keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
 
-        .typing-cursor::after { content: '█'; animation: blink 0.8s infinite; color: var(--neon-cyan); margin-left: 4px; }
-        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.typing-cursor::after { content: '█'; animation: blink 0.8s infinite; color: var(--neon-cyan); margin-left: 4px; }
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
-        .stress-container { width: 100%; height: 4px; background: #333; margin-top: 8px; position: relative; overflow: hidden; }
-        .stress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-amber), var(--neon-pink)); width: 0%; transition: width 0.5s ease; }
+.stress-container { width: 100%; height: 4px; background: #333; margin-top: 8px; position: relative; overflow: hidden; }
+.stress-fill { height: 100%; background: linear-gradient(90deg, var(--neon-cyan), var(--neon-amber), var(--neon-pink)); width: 0%; transition: width 0.5s ease; }
 
-        .theme-scroll::-webkit-scrollbar { height: 0px; background: transparent; }
+.theme-scroll::-webkit-scrollbar { height: 0px; background: transparent; }
 
-        /* ===== ADDED: PERSONALITY DOCK ===== */
-        .persona-scroll::-webkit-scrollbar { height: 0px; background: transparent; }
-        .persona-card {
-            min-width: 210px;
-            background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.10);
-            border-radius: 10px;
-            padding: 14px;
-            position: relative;
-            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-            user-select: none;
-        }
-        .persona-card:hover { transform: translateY(-2px); border-color: rgba(0,245,255,0.35); background: rgba(0,245,255,0.06); }
-        .persona-card.active {
-            border-color: rgba(0,245,255,0.65);
-            box-shadow: 0 0 22px rgba(0,245,255,0.12);
-            background: rgba(0,245,255,0.08);
-            transform: translateY(-2px) scale(1.01);
-        }
-        .persona-lock {
-            position: absolute;
-            right: 10px;
-            top: 10px;
-            font-size: 9px;
-            background: rgba(255,0,85,0.9);
-            color: #fff;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-weight: 800;
-            letter-spacing: 0.12em;
-        }
-        .persona-tag {
-            display: inline-flex;
-            font-size: 9px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            padding: 3px 8px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(255,255,255,0.04);
-            opacity: 0.85;
-        }
-        .persona-title { font-weight: 800; letter-spacing: -0.01em; }
-        .persona-desc { font-size: 10px; opacity: 0.75; line-height: 1.35; }
-        .persona-strip {
-            display: flex;
-            gap: 10px;
-            overflow-x: auto;
-            padding: 10px 2px 2px 2px;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-        }
-        .persona-strip > .persona-card { scroll-snap-align: start; }
-        .persona-fade {
-            position: relative;
-        }
-        .persona-fade:before, .persona-fade:after {
-            content: "";
-            position: absolute;
-            top: 0;
-            width: 42px;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
-        .persona-fade:before {
-            left: 0;
-            background: linear-gradient(90deg, rgba(10,11,15,0.95), rgba(10,11,15,0));
-        }
-        .persona-fade:after {
-            right: 0;
-            background: linear-gradient(270deg, rgba(10,11,15,0.95), rgba(10,11,15,0));
-        }
+/* ===== ADDED: PERSONALITY DOCK ===== */
+.persona-scroll::-webkit-scrollbar { height: 0px; background: transparent; }
+.persona-card {
+min-width: 210px;
+background: rgba(0,0,0,0.35);
+border: 1px solid rgba(255,255,255,0.10);
+border-radius: 10px;
+padding: 14px;
+position: relative;
+transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+user-select: none;
+}
+.persona-card:hover { transform: translateY(-2px); border-color: rgba(0,245,255,0.35); background: rgba(0,245,255,0.06); }
+.persona-card.active {
+border-color: rgba(0,245,255,0.65);
+box-shadow: 0 0 22px rgba(0,245,255,0.12);
+background: rgba(0,245,255,0.08);
+transform: translateY(-2px) scale(1.01);
+}
+.persona-lock {
+position: absolute;
+right: 10px;
+top: 10px;
+font-size: 9px;
+background: rgba(255,0,85,0.9);
+color: #fff;
+padding: 2px 6px;
+border-radius: 4px;
+font-weight: 800;
+letter-spacing: 0.12em;
+}
+.persona-tag {
+display: inline-flex;
+font-size: 9px;
+letter-spacing: 0.18em;
+text-transform: uppercase;
+padding: 3px 8px;
+border-radius: 999px;
+border: 1px solid rgba(255,255,255,0.12);
+background: rgba(255,255,255,0.04);
+opacity: 0.85;
+}
+.persona-title { font-weight: 800; letter-spacing: -0.01em; }
+.persona-desc { font-size: 10px; opacity: 0.75; line-height: 1.35; }
+.persona-strip {
+display: flex;
+gap: 10px;
+overflow-x: auto;
+padding: 10px 2px 2px 2px;
+scroll-snap-type: x mandatory;
+-webkit-overflow-scrolling: touch;
+}
+.persona-strip > .persona-card { scroll-snap-align: start; }
+.persona-fade {
+position: relative;
+}
+.persona-fade:before, .persona-fade:after {
+content: "";
+position: absolute;
+top: 0;
+width: 42px;
+height: 100%;
+pointer-events: none;
+z-index: 2;
+}
+.persona-fade:before {
+left: 0;
+background: linear-gradient(90deg, rgba(10,11,15,0.95), rgba(10,11,15,0));
+}
+.persona-fade:after {
+right: 0;
+background: linear-gradient(270deg, rgba(10,11,15,0.95), rgba(10,11,15,0));
+}
 
-        /* ===== ADDED: TOASTS (replaces dev alerts without removing alert calls) ===== */
-        #toast-layer {
-            position: fixed;
-            top: 18px;
-            left: 18px;
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
-        }
-        .toast {
-            pointer-events: none;
-            max-width: min(520px, 90vw);
-            border-radius: 12px;
-            padding: 12px 14px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background: rgba(0,0,0,0.72);
-            box-shadow: 0 0 30px rgba(0,245,255,0.06);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            overflow: hidden;
-            position: relative;
-        }
-        .toast:before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 20%, rgba(0,245,255,0.12), transparent 50%);
-            opacity: 0.8;
-        }
-        .toast .h {
-            position: relative;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 10px;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
-        .toast .b {
-            position: relative;
-            margin-top: 6px;
-            font-size: 12px;
-            line-height: 1.35;
-            font-family: 'JetBrains Mono', monospace;
-            opacity: 0.92;
-        }
-        .toast .bar {
-            position: relative;
-            height: 2px;
-            width: 100%;
-            margin-top: 10px;
-            background: rgba(255,255,255,0.08);
-            overflow: hidden;
-            border-radius: 999px;
-        }
-        .toast .bar > i {
-            display: block;
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(90deg, var(--neon-cyan), var(--neon-amber), var(--neon-pink));
-            transform-origin: left center;
-        }
+/* ===== ADDED: TOASTS (replaces dev alerts without removing alert calls) ===== */
+#toast-layer {
+position: fixed;
+top: 18px;
+left: 18px;
+z-index: 10000;
+display: flex;
+flex-direction: column;
+gap: 10px;
+pointer-events: none;
+}
+.toast {
+pointer-events: none;
+max-width: min(520px, 90vw);
+border-radius: 12px;
+padding: 12px 14px;
+border: 1px solid rgba(255,255,255,0.12);
+background: rgba(0,0,0,0.72);
+box-shadow: 0 0 30px rgba(0,245,255,0.06);
+backdrop-filter: blur(14px);
+-webkit-backdrop-filter: blur(14px);
+overflow: hidden;
+position: relative;
+}
+.toast:before {
+content: "";
+position: absolute;
+inset: 0;
+background: radial-gradient(circle at 20% 20%, rgba(0,245,255,0.12), transparent 50%);
+opacity: 0.8;
+}
+.toast .h {
+position: relative;
+display: flex;
+align-items: center;
+gap: 10px;
+font-size: 10px;
+letter-spacing: 0.22em;
+text-transform: uppercase;
+opacity: 0.8;
+}
+.toast .b {
+position: relative;
+margin-top: 6px;
+font-size: 12px;
+line-height: 1.35;
+font-family: 'JetBrains Mono', monospace;
+opacity: 0.92;
+}
+.toast .bar {
+position: relative;
+height: 2px;
+width: 100%;
+margin-top: 10px;
+background: rgba(255,255,255,0.08);
+overflow: hidden;
+border-radius: 999px;
+}
+.toast .bar > i {
+display: block;
+height: 100%;
+width: 100%;
+background: linear-gradient(90deg, var(--neon-cyan), var(--neon-amber), var(--neon-pink));
+transform-origin: left center;
+}
 
-        /* ===== ADDED: LANGUAGE DOCK (Persona-style) ===== */
-        .lang-card {
-            min-width: 180px;
-            background: rgba(0,0,0,0.35);
-            border: 1px solid rgba(255,255,255,0.10);
-            border-radius: 10px;
-            padding: 12px 14px;
-            position: relative;
-            transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-            user-select: none;
-        }
-        .lang-card:hover {
-            transform: translateY(-2px);
-            border-color: rgba(0,245,255,0.35);
-            background: rgba(0,245,255,0.06);
-        }
-        .lang-card.active {
-            border-color: rgba(0,245,255,0.65);
-            box-shadow: 0 0 22px rgba(0,245,255,0.12);
-            background: rgba(0,245,255,0.08);
-            transform: translateY(-2px) scale(1.01);
-        }
-        .lang-flag { font-size: 18px; line-height: 1; }
-        .lang-name { font-weight: 800; font-size: 12px; letter-spacing: 0.02em; }
-        .lang-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.75; margin-top: 2px; }
-    </style>
+/* ===== ADDED: LANGUAGE DOCK (Persona-style) ===== */
+.lang-card {
+min-width: 180px;
+background: rgba(0,0,0,0.35);
+border: 1px solid rgba(255,255,255,0.10);
+border-radius: 10px;
+padding: 12px 14px;
+position: relative;
+transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+user-select: none;
+}
+.lang-card:hover {
+transform: translateY(-2px);
+border-color: rgba(0,245,255,0.35);
+background: rgba(0,245,255,0.06);
+}
+.lang-card.active {
+border-color: rgba(0,245,255,0.65);
+box-shadow: 0 0 22px rgba(0,245,255,0.12);
+background: rgba(0,245,255,0.08);
+transform: translateY(-2px) scale(1.01);
+}
+.lang-flag { font-size: 18px; line-height: 1; }
+.lang-name { font-weight: 800; font-size: 12px; letter-spacing: 0.02em; }
+.lang-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; opacity: 0.75; margin-top: 2px; }
+</style>
 </head>
 
 <body class="flex items-center justify-center h-screen w-screen">
-    <div class="scanlines"></div>
-    <canvas id="starfield" class="fixed inset-0 z-0 opacity-80"></canvas>
+<div class="scanlines"></div>
+<canvas id="starfield" class="fixed inset-0 z-0 opacity-80"></canvas>
 
-    <div class="fixed top-6 right-6 z-50 flex gap-4">
-        <button onclick="toggleAudio()" id="audio-btn" class="text-xs font-mono text-cyan-500 border border-cyan-500/30 px-3 py-1 hover:bg-cyan-500/10 transition-colors">[AUDIO: OFF]</button>
-    </div>
+<div class="fixed top-6 right-6 z-50 flex gap-4">
+<button onclick="toggleAudio()" id="audio-btn" class="text-xs font-mono text-cyan-500 border border-cyan-500/30 px-3 py-1 hover:bg-cyan-500/10 transition-colors">[AUDIO: OFF]</button>
+</div>
 
-    <section id="setup-view" class="relative z-10 w-full max-w-4xl flex gap-8 p-4">
-        <div class="flex-1 glass-panel p-10 rounded-lg relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
-            <h1 class="text-5xl font-bold tracking-tighter mb-2">ANTERVIEW<span class="text-cyan-400">.OS</span></h1>
-            <p class="text-xs mono text-slate-500 mb-8 tracking-[0.2em]">NEURAL LINK STATUS: ONLINE</p>
+<section id="setup-view" class="relative z-10 w-full max-w-4xl flex gap-8 p-4">
+<div class="flex-1 glass-panel p-10 rounded-lg relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-cyan-500"></div>
+<h1 class="text-5xl font-bold tracking-tighter mb-2">ANTERVIEW<span class="text-cyan-400">.OS</span></h1>
+<p class="text-xs mono text-slate-500 mb-8 tracking-[0.2em]">NEURAL LINK STATUS: ONLINE</p>
 
-            <div class="space-y-6" id="setup-stack">
-                <div>
-                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Target Vector (Job Title)</label>
-                    <input id="job-title" type="text" placeholder="e.g. Senior Solidity Engineer" class="sci-input">
-                </div>
+<div class="space-y-6" id="setup-stack">
+<div>
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Target Vector (Job Title)</label>
+<input id="job-title" type="text" placeholder="e.g. Senior Solidity Engineer" class="sci-input">
+</div>
 
-                <div class="grid grid-cols-2 gap-4" id="mode-grid">
-                    <div class="p-4 border border-cyan-500/50 bg-cyan-500/5 rounded cursor-pointer hover:bg-cyan-500/10 transition-colors" onclick="selectMode(this, 'free')">
-                        <div class="text-cyan-400 font-bold text-sm mb-1">STANDARD PROTOCOL</div>
-                        <div class="text-[10px] text-slate-400">Persona: Herman (Brutal)</div>
-                    </div>
+<div class="grid grid-cols-2 gap-4" id="mode-grid">
+<div class="p-4 border border-cyan-500/50 bg-cyan-500/5 rounded cursor-pointer hover:bg-cyan-500/10 transition-colors" onclick="selectMode(this, 'free')">
+<div class="text-cyan-400 font-bold text-sm mb-1">STANDARD PROTOCOL</div>
+<div class="text-[10px] text-slate-400">Persona: Herman (Brutal)</div>
+</div>
 
-                    <div id="pro-card" class="p-4 border border-white/10 bg-black/40 rounded locked-option transition-all duration-300">
-                        <div class="locked-badge">PRO ($9)</div>
-                        <div class="text-slate-500 font-bold text-sm mb-1">FAANG SIMULATION</div>
-                        <div class="text-[10px] text-slate-600">Persona: Google L5 Committee</div>
-                    </div>
-                </div>
+<div id="pro-card" class="p-4 border border-white/10 bg-black/40 rounded locked-option transition-all duration-300">
+<div class="locked-badge">PRO ($9)</div>
+<div class="text-slate-500 font-bold text-sm mb-1">FAANG SIMULATION</div>
+<div class="text-[10px] text-slate-600">Persona: Google L5 Committee</div>
+</div>
+</div>
 
-                <!-- ===== ADDED: Language Dock Mount (persona-style) ===== -->
-                <div id="language-dock-mount"></div>
+<!-- ===== ADDED: Language Dock Mount (persona-style) ===== -->
+<div id="language-dock-mount"></div>
 
-                <div>
-                    <label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Tech Stack</label>
-                    <select id="stack" class="sci-input">
-                        <option value="Python & AWS">Python / AWS</option>
-                        <option value="React & Node">React / Node.js</option>
-                        <option value="Rust & Solana">Rust / Solana</option>
-                    </select>
-                </div>
+<div>
+<label class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 block">Tech Stack</label>
+<select id="stack" class="sci-input">
+<option value="Python & AWS">Python / AWS</option>
+<option value="React & Node">React / Node.js</option>
+<option value="Rust & Solana">Rust / Solana</option>
+</select>
+</div>
 
-                <button onclick="bootSystem()" class="sci-btn w-full mt-4 flex justify-center items-center gap-2">
-                    <span>INITIALIZE</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </button>
-            </div>
-        </div>
+<button onclick="bootSystem()" class="sci-btn w-full mt-4 flex justify-center items-center gap-2">
+<span>INITIALIZE</span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+</button>
+</div>
+</div>
 
-        <div class="w-64 glass-panel p-6 rounded-lg hidden md:block">
-            <div class="text-[10px] mono text-cyan-500 mb-4 border-b border-cyan-500/20 pb-2">SYSTEM LOGS</div>
-            <div id="boot-log" class="text-[9px] mono text-slate-400 space-y-1 opacity-70">
-                <div>> Kernel loaded...</div>
-            </div>
-        </div>
-    </section>
+<div class="w-64 glass-panel p-6 rounded-lg hidden md:block">
+<div class="text-[10px] mono text-cyan-500 mb-4 border-b border-cyan-500/20 pb-2">SYSTEM LOGS</div>
+<div id="boot-log" class="text-[9px] mono text-slate-400 space-y-1 opacity-70">
+<div>> Kernel loaded...</div>
+</div>
+</div>
+</section>
 
-    <main id="chat-view" class="fixed inset-0 z-20 hidden flex flex-col items-center justify-center p-4">
-        <div class="w-full max-w-5xl h-[85vh] glass-panel rounded-lg flex overflow-hidden shadow-2xl border-t border-cyan-500/50">
+<main id="chat-view" class="fixed inset-0 z-20 hidden flex flex-col items-center justify-center p-4">
+<div class="w-full max-w-5xl h-[85vh] glass-panel rounded-lg flex overflow-hidden shadow-2xl border-t border-cyan-500/50">
 
-            <div class="w-64 bg-black/40 border-r border-white/5 p-6 flex flex-col gap-6 hidden md:flex">
-                <div>
-                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">Stress Monitor</div>
-                    <div class="stress-container rounded-full">
-                        <div id="stress-bar" class="stress-fill"></div>
-                    </div>
-                    <div class="flex justify-between mt-1 text-[8px] mono text-slate-500">
-                        <span>CALM</span><span>PANIC</span>
-                    </div>
-                </div>
+<div class="w-64 bg-black/40 border-r border-white/5 p-6 flex flex-col gap-6 hidden md:flex">
+<div>
+<div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">Stress Monitor</div>
+<div class="stress-container rounded-full">
+<div id="stress-bar" class="stress-fill"></div>
+</div>
+<div class="flex justify-between mt-1 text-[8px] mono text-slate-500">
+<span>CALM</span><span>PANIC</span>
+</div>
+</div>
 
-                <div>
-                    <div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">Question Progress</div>
-                    <div class="text-4xl font-bold text-white mono" id="q-counter">01<span class="text-lg text-slate-600">/05</span></div>
-                </div>
+<div>
+<div class="text-[9px] font-bold text-slate-500 uppercase tracking-widest mb-2">Question Progress</div>
+<div class="text-4xl font-bold text-white mono" id="q-counter">01<span class="text-lg text-slate-600">/05</span></div>
+</div>
 
-                <div class="mt-auto">
-                    <div class="p-3 bg-red-500/10 border border-red-500/20 rounded mb-2">
-                        <div class="text-[9px] text-red-400 font-bold mb-1">LIVE FEEDBACK</div>
-                        <div class="text-[8px] text-red-300 opacity-70">"Stop hesitating. Your typing speed suggests uncertainty."</div>
-                    </div>
-                </div>
-            </div>
+<div class="mt-auto">
+<div class="p-3 bg-red-500/10 border border-red-500/20 rounded mb-2">
+<div class="text-[9px] text-red-400 font-bold mb-1">LIVE FEEDBACK</div>
+<div class="text-[8px] text-red-300 opacity-70">"Stop hesitating. Your typing speed suggests uncertainty."</div>
+</div>
+</div>
+</div>
 
-            <div class="flex-1 flex flex-col relative bg-gradient-to-b from-transparent to-black/20">
-                <div class="h-14 border-b border-white/5 flex items-center justify-between px-6 bg-white/2">
-                    <div class="flex items-center gap-2">
-                        <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></div>
-                        <span class="text-[10px] mono text-emerald-400 tracking-widest">ENCRYPTED CONNECTION</span>
-                    </div>
-                    <div class="text-[10px] mono text-slate-500">SESSION ID: <span class="text-white">#X99-ALPHA</span></div>
-                </div>
+<div class="flex-1 flex flex-col relative bg-gradient-to-b from-transparent to-black/20">
+<div class="h-14 border-b border-white/5 flex items-center justify-between px-6 bg-white/2">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse shadow-[0_0_10px_#10b981]"></div>
+<span class="text-[10px] mono text-emerald-400 tracking-widest">ENCRYPTED CONNECTION</span>
+</div>
+<div class="text-[10px] mono text-slate-500">SESSION ID: <span class="text-white">#X99-ALPHA</span></div>
+</div>
 
-                <div id="chat-scroll" class="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar"></div>
+<div id="chat-scroll" class="flex-1 overflow-y-auto p-8 space-y-6 custom-scrollbar"></div>
 
-                <div class="p-6 border-t border-white/5 bg-black/40 relative">
-                    <input id="user-input" type="text" placeholder="Type your response..." class="w-full bg-white/5 border border-white/10 rounded p-4 text-sm text-white focus:border-cyan-500/50 outline-none mono transition-all" autocomplete="off" onkeypress="if(event.key==='Enter') sendMsg()">
-                    <div id="typing-indicator" class="absolute right-10 top-10 text-[10px] mono text-cyan-500 opacity-0 transition-opacity">AI PROCESSING...</div>
-                </div>
-            </div>
-        </div>
-    </main>
+<div class="p-6 border-t border-white/5 bg-black/40 relative">
+<input id="user-input" type="text" placeholder="Type your response..." class="w-full bg-white/5 border border-white/10 rounded p-4 text-sm text-white focus:border-cyan-500/50 outline-none mono transition-all" autocomplete="off" onkeypress="if(event.key==='Enter') sendMsg()">
+<div id="typing-indicator" class="absolute right-10 top-10 text-[10px] mono text-cyan-500 opacity-0 transition-opacity">AI PROCESSING...</div>
+</div>
+</div>
+</div>
+</main>
 
-    <section id="results-view" class="fixed inset-0 z-30 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
-        <div class="w-full max-w-3xl glass-panel rounded-lg p-10 border border-white/10 relative overflow-hidden">
-            <div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
+<section id="results-view" class="fixed inset-0 z-30 hidden bg-black/90 backdrop-blur-xl flex items-center justify-center p-4">
+<div class="w-full max-w-3xl glass-panel rounded-lg p-10 border border-white/10 relative overflow-hidden">
+<div class="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
-            <div class="relative z-10">
-                <div class="flex justify-between items-end border-b border-white/10 pb-6 mb-8">
-                    <div>
-                        <h2 class="text-3xl font-bold tracking-tight mb-2">EVALUATION COMPLETE</h2>
-                        <p class="text-xs mono text-slate-400">DATA UPLOADED TO CLOUD</p>
-                    </div>
-                    <div class="text-right">
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">HIREABILITY INDEX</div>
-                        <div id="final-score" class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">--%</div>
-                    </div>
-                </div>
+<div class="relative z-10">
+<div class="flex justify-between items-end border-b border-white/10 pb-6 mb-8">
+<div>
+<h2 class="text-3xl font-bold tracking-tight mb-2">EVALUATION COMPLETE</h2>
+<p class="text-xs mono text-slate-400">DATA UPLOADED TO CLOUD</p>
+</div>
+<div class="text-right">
+<div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">HIREABILITY INDEX</div>
+<div id="final-score" class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">--%</div>
+</div>
+</div>
 
-                <div class="grid grid-cols-3 gap-8 mb-8">
-                    <div class="col-span-2 space-y-4">
-                        <div class="text-sm text-slate-300 leading-relaxed font-light p-4 bg-white/5 rounded border border-white/5" id="final-summary">
-                            Calculating trajectory...
-                        </div>
-                        <div id="affiliate-container"></div>
+<div class="grid grid-cols-3 gap-8 mb-8">
+<div class="col-span-2 space-y-4">
+<div class="text-sm text-slate-300 leading-relaxed font-light p-4 bg-white/5 rounded border border-white/5" id="final-summary">
+Calculating trajectory...
+</div>
+<div id="affiliate-container"></div>
 
-                        <!-- PATCH: additional results mounts -->
-                        <div id="patch-results" class="space-y-4"></div>
-                    </div>
-                    <div class="space-y-2">
-                        <div class="text-[10px] font-bold text-slate-500 uppercase">Improvement Areas</div>
-                        <ul id="tips-list" class="text-xs text-slate-400 space-y-2 mono"></ul>
+<!-- PATCH: additional results mounts -->
+<div id="patch-results" class="space-y-4"></div>
+</div>
+<div class="space-y-2">
+<div class="text-[10px] font-bold text-slate-500 uppercase">Improvement Areas</div>
+<ul id="tips-list" class="text-xs text-slate-400 space-y-2 mono"></ul>
 
-                        <button onclick="downloadReport()" class="w-full mt-6 border border-white/20 hover:bg-white/5 text-xs text-white py-3 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                            Download PDF
-                        </button>
-                    </div>
-                </div>
+<button onclick="downloadReport()" class="w-full mt-6 border border-white/20 hover:bg-white/5 text-xs text-white py-3 rounded uppercase tracking-wider transition-colors flex items-center justify-center gap-2">
+<svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+Download PDF
+</button>
+</div>
+</div>
 
-                <div class="flex justify-end pt-6 border-t border-white/5">
-                    <button onclick="location.reload()" class="sci-btn text-xs px-8 py-3">NEW SESSION</button>
-                </div>
-            </div>
-        </div>
-    </section>
+<div class="flex justify-end pt-6 border-t border-white/5">
+<button onclick="location.reload()" class="sci-btn text-xs px-8 py-3">NEW SESSION</button>
+</div>
+</div>
+</div>
+</section>
 
-    <div id="theme-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 p-3 rounded-full glass-panel scale-90 opacity-60 hover:opacity-100 hover:scale-100 transition-all duration-300 backdrop-blur-md theme-scroll" style="max-width: 90vw; overflow-x: auto;">
-        <span class="text-[9px] mono text-slate-500 hidden md:block pl-2">THEME_OS:</span>
-        <button onclick="setTheme('cyan')" class="w-8 h-8 rounded-full border border-cyan-500 bg-cyan-900/50 hover:bg-cyan-500 hover:shadow-[0_0_15px_#06b6d4] transition-all relative group">
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-cyan-500 text-cyan-500 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">CYBERPUNK</div>
-        </button>
-        <button onclick="setTheme('red')" class="w-8 h-8 rounded-full border border-red-600 bg-red-900/50 hover:bg-red-600 hover:shadow-[0_0_15px_#dc2626] transition-all relative group">
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-red-600 text-red-600 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">PREDATOR</div>
-        </button>
-        <button onclick="setTheme('green')" class="w-8 h-8 rounded-full border border-green-500 bg-green-900/50 hover:bg-green-500 hover:shadow-[0_0_15px_#22c55e] transition-all relative group">
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-green-500 text-green-500 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">MATRIX</div>
-        </button>
-        <button onclick="setTheme('amber')" class="w-8 h-8 rounded-full border border-amber-500 bg-amber-900/50 hover:bg-amber-500 hover:shadow-[0_0_15px_#f59e0b] transition-all relative group">
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-amber-500 text-amber-500 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">DEUS EX</div>
-        </button>
-        <button onclick="setTheme('white')" class="w-8 h-8 rounded-full border border-white bg-slate-800 hover:bg-white hover:shadow-[0_0_15px_#ffffff] transition-all relative group">
-            <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white text-white text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">INSTITUTE</div>
-        </button>
-    </div>
+<div id="theme-dock" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-40 flex items-center gap-3 p-3 rounded-full glass-panel scale-90 opacity-60 hover:opacity-100 hover:scale-100 transition-all duration-300 backdrop-blur-md theme-scroll" style="max-width: 90vw; overflow-x: auto;">
+<span class="text-[9px] mono text-slate-500 hidden md:block pl-2">THEME_OS:</span>
+<button onclick="setTheme('cyan')" class="w-8 h-8 rounded-full border border-cyan-500 bg-cyan-900/50 hover:bg-cyan-500 hover:shadow-[0_0_15px_#06b6d4] transition-all relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-cyan-500 text-cyan-500 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">CYBERPUNK</div>
+</button>
+<button onclick="setTheme('red')" class="w-8 h-8 rounded-full border border-red-600 bg-red-900/50 hover:bg-red-600 hover:shadow-[0_0_15px_#dc2626] transition-all relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-red-600 text-red-600 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">PREDATOR</div>
+</button>
+<button onclick="setTheme('green')" class="w-8 h-8 rounded-full border border-green-500 bg-green-900/50 hover:bg-green-500 hover:shadow-[0_0_15px_#22c55e] transition-all relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-green-500 text-green-500 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">MATRIX</div>
+</button>
+<button onclick="setTheme('amber')" class="w-8 h-8 rounded-full border border-amber-500 bg-amber-900/50 hover:bg-amber-500 hover:shadow-[0_0_15px_#f59e0b] transition-all relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-amber-500 text-amber-500 text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">DEUS EX</div>
+</button>
+<button onclick="setTheme('white')" class="w-8 h-8 rounded-full border border-white bg-slate-800 hover:bg-white hover:shadow-[0_0_15px_#ffffff] transition-all relative group">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-black border border-white text-white text-[9px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">INSTITUTE</div>
+</button>
+</div>
 
-    <div id="network-monitor" class="fixed bottom-0 left-0 w-full h-48 bg-black border-t-2 border-green-500 z-[100] hidden font-mono text-[10px] p-2 overflow-hidden shadow-[0_0_50px_rgba(0,255,0,0.2)]">
-        <div class="flex justify-between items-center border-b border-green-500/30 pb-1 mb-2">
-            <span class="text-green-500 font-bold">>> GOD_MODE_NETWORK_TRAFFIC</span>
-            <button onclick="document.getElementById('network-monitor').style.display='none'" class="text-green-500 hover:bg-green-500/20 px-2">[HIDE]</button>
-        </div>
-        <div id="network-logs" class="h-full overflow-y-auto space-y-2 pb-8 text-green-400/80"></div>
-    </div>
+<div id="network-monitor" class="fixed bottom-0 left-0 w-full h-48 bg-black border-t-2 border-green-500 z-[100] hidden font-mono text-[10px] p-2 overflow-hidden shadow-[0_0_50px_rgba(0,255,0,0.2)]">
+<div class="flex justify-between items-center border-b border-green-500/30 pb-1 mb-2">
+<span class="text-green-500 font-bold">>> GOD_MODE_NETWORK_TRAFFIC</span>
+<button onclick="document.getElementById('network-monitor').style.display='none'" class="text-green-500 hover:bg-green-500/20 px-2">[HIDE]</button>
+</div>
+<div id="network-logs" class="h-full overflow-y-auto space-y-2 pb-8 text-green-400/80"></div>
+</div>
 
-    <div id="dev-console-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
-        <div style="background: #000; border: 2px solid #0f0; padding: 20px; width: 300px; font-family: 'Courier New', monospace; box-shadow: 0 0 20px #0f0;">
-            <p style="color: #0f0; margin: 0 0 10px 0; text-transform: uppercase;">> SYSTEM OVERRIDE DETECTED</p>
-            <input type="text" id="dev-password-input" placeholder="ENTER PASSCODE..." style="background: transparent; border: none; border-bottom: 1px solid #0f0; color: #0f0; width: 100%; outline: none; font-family: 'Courier New', monospace; font-size: 16px;">
-            <p id="dev-error" style="color: red; display: none; margin-top: 10px;">> ACCESS DENIED</p>
-        </div>
-    </div>
+<div id="dev-console-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+<div style="background: #000; border: 2px solid #0f0; padding: 20px; width: 300px; font-family: 'Courier New', monospace; box-shadow: 0 0 20px #0f0;">
+<p style="color: #0f0; margin: 0 0 10px 0; text-transform: uppercase;">> SYSTEM OVERRIDE DETECTED</p>
+<input type="text" id="dev-password-input" placeholder="ENTER PASSCODE..." style="background: transparent; border: none; border-bottom: 1px solid #0f0; color: #0f0; width: 100%; outline: none; font-family: 'Courier New', monospace; font-size: 16px;">
+<p id="dev-error" style="color: red; display: none; margin-top: 10px;">> ACCESS DENIED</p>
+</div>
+</div>
 
-    <div id="toast-layer"></div>
+<div id="toast-layer"></div>
 
-    <script>
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        let audioEnabled = false;
+<script>
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+let audioEnabled = false;
 
-        function toggleAudio() {
-            audioEnabled = !audioEnabled;
-            document.getElementById('audio-btn').innerText = audioEnabled ? "[AUDIO: ON]" : "[AUDIO: OFF]";
-            if(audioEnabled) playTone(440, 'sine', 0.1);
-        }
+function toggleAudio() {
+audioEnabled = !audioEnabled;
+document.getElementById('audio-btn').innerText = audioEnabled ? "[AUDIO: ON]" : "[AUDIO: OFF]";
+if(audioEnabled) playTone(440, 'sine', 0.1);
+}
 
-        function playTone(freq, type, duration) {
-            if(!audioEnabled) return;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = type;
-            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
-            gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-            gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(audioCtx.currentTime + duration);
-        }
+function playTone(freq, type, duration) {
+if(!audioEnabled) return;
+const osc = audioCtx.createOscillator();
+const gain = audioCtx.createGain();
+osc.type = type;
+osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+osc.connect(gain);
+gain.connect(audioCtx.destination);
+osc.start();
+osc.stop(audioCtx.currentTime + duration);
+}
 
-        function sfxType() { playTone(800 + Math.random()*200, 'square', 0.05); }
-        function sfxSend() { playTone(400, 'sine', 0.3); playTone(600, 'sine', 0.3); }
-        function sfxAlert() { playTone(200, 'sawtooth', 0.4); }
-    </script>
+function sfxType() { playTone(800 + Math.random()*200, 'square', 0.05); }
+function sfxSend() { playTone(400, 'sine', 0.3); playTone(600, 'sine', 0.3); }
+function sfxAlert() { playTone(200, 'sawtooth', 0.4); }
+</script>
 
-    <script>
-        const cvs = document.getElementById('starfield');
-        const ctx = cvs.getContext('2d');
-        let w, h, stars = [], mouse = {x:0, y:0};
+<script>
+const cvs = document.getElementById('starfield');
+const ctx = cvs.getContext('2d');
+let w, h, stars = [], mouse = {x:0, y:0};
 
-        function resize() { w = cvs.width = window.innerWidth; h = cvs.height = window.innerHeight; initStars(); }
-        class Star {
-            constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.z = Math.random()*2; this.size = Math.random()*2.5 + 0.5; }
-            update() {
-                this.x += (mouse.x - w/2) * 0.0005 * this.z;
-                this.y += (mouse.y - h/2) * 0.0005 * this.z;
-                if(this.x<0) this.x=w; if(this.x>w) this.x=0; if(this.y<0) this.y=h; if(this.y>h) this.y=0;
-            }
-            draw() { ctx.fillStyle=`rgba(255,255,255,${0.7*this.z})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
-        }
-        function initStars() { stars = []; for(let i=0; i<300; i++) stars.push(new Star()); }
-        function animate() { ctx.clearRect(0,0,w,h); stars.forEach(s=>{s.update(); s.draw()}); requestAnimationFrame(animate); }
+function resize() { w = cvs.width = window.innerWidth; h = cvs.height = window.innerHeight; initStars(); }
+class Star {
+constructor() { this.x = Math.random()*w; this.y = Math.random()*h; this.z = Math.random()*2; this.size = Math.random()*2.5 + 0.5; }
+update() {
+this.x += (mouse.x - w/2) * 0.0005 * this.z;
+this.y += (mouse.y - h/2) * 0.0005 * this.z;
+if(this.x<0) this.x=w; if(this.x>w) this.x=0; if(this.y<0) this.y=h; if(this.y>h) this.y=0;
+}
+draw() { ctx.fillStyle=`rgba(255,255,255,${0.7*this.z})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fill(); }
+}
+function initStars() { stars = []; for(let i=0; i<300; i++) stars.push(new Star()); }
+function animate() { ctx.clearRect(0,0,w,h); stars.forEach(s=>{s.update(); s.draw()}); requestAnimationFrame(animate); }
 
-        window.addEventListener('resize', resize);
-        window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-        resize(); animate();
-    </script>
+window.addEventListener('resize', resize);
+window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+resize(); animate();
+</script>
 
-    <script>
-        let history = [], currentQ = 1, maxQ = 5;
-        let stress = 20;
-        let isGodMode = false;
+<script>
+let history = [], currentQ = 1, maxQ = 5;
+let stress = 20;
+let isGodMode = false;
 
-        function log(msg) {
-            const el = document.getElementById('boot-log');
-            el.innerHTML += `<div>> ${msg}</div>`;
-        }
-        setTimeout(() => log("Loading assets..."), 500);
-        setTimeout(() => log("Connecting to neural net..."), 1200);
+function log(msg) {
+const el = document.getElementById('boot-log');
+el.innerHTML += `<div>> ${msg}</div>`;
+}
+setTimeout(() => log("Loading assets..."), 500);
+setTimeout(() => log("Connecting to neural net..."), 1200);
 
-        function bootSystem() {
-            playTone(100, 'sawtooth', 1.0);
-            const tl = gsap.timeline();
+function bootSystem() {
+playTone(100, 'sawtooth', 1.0);
+const tl = gsap.timeline();
 
-            // 1. Hide the Theme Dock
-            tl.to("#theme-dock", { opacity: 0, duration: 0.5, onComplete: () => {
-                document.getElementById('theme-dock').style.display = 'none';
-            }}, 0);
+// 1. Hide the Theme Dock
+tl.to("#theme-dock", { opacity: 0, duration: 0.5, onComplete: () => {
+document.getElementById('theme-dock').style.display = 'none';
+}}, 0);
 
-            // 2. Hide Setup & Show Chat
-            tl.to("#setup-view", { opacity: 0, scale: 0.9, duration: 0.5, onComplete: () => {
-                document.getElementById('setup-view').style.display = 'none';
-                document.getElementById('chat-view').classList.remove('hidden');
-                initInterview();
-            }}, 0)
-            .from("#chat-view", { opacity: 0, scale: 1.05, duration: 0.8 });
-        }
+// 2. Hide Setup & Show Chat
+tl.to("#setup-view", { opacity: 0, scale: 0.9, duration: 0.5, onComplete: () => {
+document.getElementById('setup-view').style.display = 'none';
+document.getElementById('chat-view').classList.remove('hidden');
+initInterview();
+}}, 0)
+.from("#chat-view", { opacity: 0, scale: 1.05, duration: 0.8 });
+}
 
-        function initInterview() {
-            const job = document.getElementById('job-title').value || "Engineer";
-            const stack = document.getElementById('stack').value;
+function initInterview() {
+const job = document.getElementById('job-title').value || "Engineer";
+const stack = document.getElementById('stack').value;
 
-            const sysPrompt = `You are Herman, a brutal technical interviewer. Job: ${job}. Stack: ${stack}.
-            RULES:
-            1. Be harsh. If answer is vague, roast them.
-            2. Ask ONE hard question.
-            3. Max 5 questions total.
-            4. If the user seems stressed (short answers), pressure them.
-            5. End with [END].`;
+const sysPrompt = `You are Herman, a brutal technical interviewer. Job: ${job}. Stack: ${stack}.
+RULES:
+1. Be harsh. If answer is vague, roast them.
+2. Ask ONE hard question.
+3. Max 5 questions total.
+4. If the user seems stressed (short answers), pressure them.
+5. End with [END].`;
 
-            history.push({role: "system", content: sysPrompt});
-            callAI("Start interview.");
-        }
+history.push({role: "system", content: sysPrompt});
+callAI("Start interview.");
+}
 
-        async function sendMsg() {
-            const input = document.getElementById('user-input');
-            const txt = input.value.trim();
-            if(!txt) return;
+async function sendMsg() {
+const input = document.getElementById('user-input');
+const txt = input.value.trim();
+if(!txt) return;
 
-            sfxSend();
-            addBubble("CANDIDATE", txt, true);
-            input.value = ""; input.disabled = true;
-            document.getElementById('typing-indicator').style.opacity = 1;
+sfxSend();
+addBubble("CANDIDATE", txt, true);
+input.value = ""; input.disabled = true;
+document.getElementById('typing-indicator').style.opacity = 1;
 
-            updateStress(Math.random() * 10 - 2);
+updateStress(Math.random() * 10 - 2);
 
-            history.push({role: "user", content: txt});
-            currentQ++;
-            if(currentQ <= maxQ) document.getElementById('q-counter').innerHTML = `0${currentQ}<span class="text-lg text-slate-600">/05</span>`;
+history.push({role: "user", content: txt});
+currentQ++;
+if(currentQ <= maxQ) document.getElementById('q-counter').innerHTML = `0${currentQ}<span class="text-lg text-slate-600">/05</span>`;
 
-            await callAI(txt);
-        }
+await callAI(txt);
+}
 
-        async function callAI(msg) {
-            const payload = { messages: history, stressLevel: stress };
+async function callAI(msg) {
+const payload = { messages: history, stressLevel: stress };
 
-            if(isGodMode) logNetwork("REQ", "POST /.netlify/functions/chat", payload);
+if(isGodMode) logNetwork("REQ", "POST /.netlify/functions/chat", payload);
 
-            try {
-                const res = await fetch("/.netlify/functions/chat", {
-                    method: "POST",
-                    body: JSON.stringify(payload)
-                });
-                const data = await res.json();
+try {
+const res = await fetch("/.netlify/functions/chat", {
+method: "POST",
+body: JSON.stringify(payload)
+});
+const data = await res.json();
 
-                if(isGodMode) logNetwork("RES", "200 OK", data);
+if(isGodMode) logNetwork("RES", "200 OK", data);
 
-                if(data.error) throw new Error(data.error);
+if(data.error) throw new Error(data.error);
 
-                const reply = data.choices[0].message.content;
+const reply = data.choices[0].message.content;
 
-                document.getElementById('typing-indicator').style.opacity = 0;
-                input = document.getElementById('user-input');
-                input.disabled = false; input.focus();
+document.getElementById('typing-indicator').style.opacity = 0;
+input = document.getElementById('user-input');
+input.disabled = false; input.focus();
 
-                if(reply.includes("[END]")) {
-                    endGame();
-                } else {
-                    history.push({role: "assistant", content: reply});
-                    typewriter(reply);
-                    if(reply.length > 200) updateStress(10);
-                }
+if(reply.includes("[END]")) {
+endGame();
+} else {
+history.push({role: "assistant", content: reply});
+typewriter(reply);
+if(reply.length > 200) updateStress(10);
+}
 
-            } catch(e) {
-                console.error(e);
-                sfxAlert();
+} catch(e) {
+console.error(e);
+sfxAlert();
 
-                if(isGodMode) logNetwork("ERR", "500 SERVER ERROR", { error: "Failed to fetch. Are you running local?", details: e.message });
+if(isGodMode) logNetwork("ERR", "500 SERVER ERROR", { error: "Failed to fetch. Are you running local?", details: e.message });
 
-                addBubble("SYSTEM", "CONNECTION ERROR: Check Netlify API Key.", false);
-            }
-        }
+addBubble("SYSTEM", "CONNECTION ERROR: Check Netlify API Key.", false);
+}
+}
 
-        function logNetwork(type, header, data) {
-            const container = document.getElementById('network-logs');
-            const entry = document.createElement('div');
-            const time = new Date().toISOString().split('T')[1].split('.')[0];
-            const color = type === "ERR" ? "text-red-500" : (type === "REQ" ? "text-cyan-500" : "text-green-500");
+function logNetwork(type, header, data) {
+const container = document.getElementById('network-logs');
+const entry = document.createElement('div');
+const time = new Date().toISOString().split('T')[1].split('.')[0];
+const color = type === "ERR" ? "text-red-500" : (type === "REQ" ? "text-cyan-500" : "text-green-500");
 
-            entry.className = "border-b border-white/10 pb-1 mb-1 font-mono text-[9px] break-all";
-            entry.innerHTML = `
-                <div class="flex gap-2 opacity-50 mb-1">
-                    <span>[${time}]</span>
-                    <span class="${color} font-bold">[${type}]</span>
-                    <span>${header}</span>
-                </div>
-                <div class="pl-4 opacity-70">${JSON.stringify(data).substring(0, 300)}...</div>
-            `;
-            container.prepend(entry);
-        }
+entry.className = "border-b border-white/10 pb-1 mb-1 font-mono text-[9px] break-all";
+entry.innerHTML = `
+<div class="flex gap-2 opacity-50 mb-1">
+<span>[${time}]</span>
+<span class="${color} font-bold">[${type}]</span>
+<span>${header}</span>
+</div>
+<div class="pl-4 opacity-70">${JSON.stringify(data).substring(0, 300)}...</div>
+`;
+container.prepend(entry);
+}
 
-        function addBubble(role, text, isUser) {
-            const scroll = document.getElementById('chat-scroll');
-            const div = document.createElement('div');
-            div.className = `flex w-full ${isUser?'justify-end':'justify-start'} msg-enter mb-6`;
+function addBubble(role, text, isUser) {
+const scroll = document.getElementById('chat-scroll');
+const div = document.createElement('div');
+div.className = `flex w-full ${isUser?'justify-end':'justify-start'} msg-enter mb-6`;
 
-            const bubble = document.createElement('div');
-            bubble.className = isUser
-                ? "max-w-[80%] bg-cyan-900/30 border border-cyan-500/30 p-4 rounded-tl-xl rounded-bl-xl rounded-br-xl text-cyan-50"
-                : "max-w-[80%] bg-white/5 border border-white/10 p-4 rounded-tr-xl rounded-br-xl rounded-bl-xl text-slate-300";
+const bubble = document.createElement('div');
+bubble.className = isUser
+? "max-w-[80%] bg-cyan-900/30 border border-cyan-500/30 p-4 rounded-tl-xl rounded-bl-xl rounded-br-xl text-cyan-50"
+: "max-w-[80%] bg-white/5 border border-white/10 p-4 rounded-tr-xl rounded-br-xl rounded-bl-xl text-slate-300";
 
-            bubble.innerHTML = `
-                <div class="text-[9px] font-bold opacity-50 mb-1 tracking-widest uppercase mb-2 ${isUser?'text-cyan-400':'text-pink-400'}">${role}</div>
-                <div class="text-sm leading-relaxed ${!isUser?'mono':''}">${text}</div>
-            `;
+bubble.innerHTML = `
+<div class="text-[9px] font-bold opacity-50 mb-1 tracking-widest uppercase mb-2 ${isUser?'text-cyan-400':'text-pink-400'}">${role}</div>
+<div class="text-sm leading-relaxed ${!isUser?'mono':''}">${text}</div>
+`;
 
-            div.appendChild(bubble);
-            scroll.appendChild(div);
+div.appendChild(bubble);
+scroll.appendChild(div);
+scroll.scrollTop = scroll.scrollHeight;
+}
+
+function typewriter(text) {
+    const scroll = document.getElementById('chat-scroll');
+    const div = document.createElement('div');
+    div.className = `flex w-full justify-start msg-enter mb-6`;
+    div.innerHTML = `
+    <div class="max-w-[80%] bg-white/5 border border-white/10 p-4 rounded-tr-xl rounded-br-xl rounded-bl-xl text-slate-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
+    <div class="text-[9px] font-bold opacity-50 mb-1 tracking-widest uppercase text-pink-400 mb-2">HERMAN</div>
+    <div class="text-sm leading-relaxed mono typing-target"></div>
+    </div>`;
+    scroll.appendChild(div);
+
+    const target = div.querySelector('.typing-target');
+    target.classList.add('typing-cursor');
+    let i = 0;
+
+    function type() {
+        if(i < text.length) {
+            target.textContent += text.charAt(i);
+            i++;
             scroll.scrollTop = scroll.scrollHeight;
+            
+            // Sound line removed here
+            
+            setTimeout(type, 15);
+        } else {
+            target.classList.remove('typing-cursor');
         }
+    }
+    type();
+}
 
-        function typewriter(text) {
-            const scroll = document.getElementById('chat-scroll');
-            const div = document.createElement('div');
-            div.className = `flex w-full justify-start msg-enter mb-6`;
-            div.innerHTML = `
-                <div class="max-w-[80%] bg-white/5 border border-white/10 p-4 rounded-tr-xl rounded-br-xl rounded-bl-xl text-slate-300 shadow-[0_0_15px_rgba(0,0,0,0.5)]">
-                    <div class="text-[9px] font-bold opacity-50 mb-1 tracking-widest uppercase text-pink-400 mb-2">HERMAN</div>
-                    <div class="text-sm leading-relaxed mono typing-target"></div>
-                </div>`;
-            scroll.appendChild(div);
+function updateStress(amount) {
+stress = Math.max(0, Math.min(100, stress + amount));
+const bar = document.getElementById('stress-bar');
+bar.style.width = `${stress}%`;
+if(stress < 50) bar.style.background = "var(--neon-cyan)";
+else if(stress < 80) bar.style.background = "var(--neon-amber)";
+else bar.style.background = "var(--neon-pink)";
+}
 
-            const target = div.querySelector('.typing-target');
-            target.classList.add('typing-cursor');
-            let i = 0;
+function endGame() {
+gsap.to("#chat-view", { opacity: 0, duration: 1, onComplete: () => {
+document.getElementById('chat-view').style.display = 'none';
+const view = document.getElementById('results-view');
+view.classList.remove('hidden');
+gsap.from(view, { opacity: 0, duration: 1 });
+generateReport();
+}});
+}
 
-            function type() {
-                if(i < text.length) {
-                    target.textContent += text.charAt(i);
-                    i++;
-                    scroll.scrollTop = scroll.scrollHeight;
-                    if(i % 3 === 0) sfxType();
-                    setTimeout(type, 15);
-                } else {
-                    target.classList.remove('typing-cursor');
-                }
-            }
-            type();
-        }
+async function generateReport() {
+const prompt = `Analyze interview. JSON format: {"score": 0-100, "summary": "text", "tips": ["tip1", "tip2", "tip3"]}`;
+const res = await fetch("/.netlify/functions/chat", { method: "POST", body: JSON.stringify({ messages: [...history, {role: "system", content: prompt}] }) });
+const data = await res.json();
+const stats = JSON.parse(data.choices[0].message.content.replace(/```json|```/g, ""));
 
-        function updateStress(amount) {
-            stress = Math.max(0, Math.min(100, stress + amount));
-            const bar = document.getElementById('stress-bar');
-            bar.style.width = `${stress}%`;
-            if(stress < 50) bar.style.background = "var(--neon-cyan)";
-            else if(stress < 80) bar.style.background = "var(--neon-amber)";
-            else bar.style.background = "var(--neon-pink)";
-        }
+let obj = { val: 0 };
+gsap.to(obj, { val: stats.score, duration: 2, onUpdate: () => {
+document.getElementById('final-score').innerText = Math.round(obj.val) + "%";
+}});
 
-        function endGame() {
-            gsap.to("#chat-view", { opacity: 0, duration: 1, onComplete: () => {
-                document.getElementById('chat-view').style.display = 'none';
-                const view = document.getElementById('results-view');
-                view.classList.remove('hidden');
-                gsap.from(view, { opacity: 0, duration: 1 });
-                generateReport();
-            }});
-        }
+document.getElementById('final-summary').innerText = stats.summary;
+document.getElementById('tips-list').innerHTML = stats.tips.map(t => `<li>> ${t}</li>`).join('');
 
-        async function generateReport() {
-            const prompt = `Analyze interview. JSON format: {"score": 0-100, "summary": "text", "tips": ["tip1", "tip2", "tip3"]}`;
-            const res = await fetch("/.netlify/functions/chat", { method: "POST", body: JSON.stringify({ messages: [...history, {role: "system", content: prompt}] }) });
-            const data = await res.json();
-            const stats = JSON.parse(data.choices[0].message.content.replace(/```json|```/g, ""));
+const container = document.getElementById('affiliate-container');
+let adLink = "https://www.tryexponent.com/?ref=YOUR_ID";
+let adText = "MASTER SYSTEM DESIGN";
+let adSub = "Recommended Course";
 
-            let obj = { val: 0 };
-            gsap.to(obj, { val: stats.score, duration: 2, onUpdate: () => {
-                document.getElementById('final-score').innerText = Math.round(obj.val) + "%";
-            }});
+if(stats.score >= 80) {
+adLink = "https://resume.io/?ref=YOUR_ID";
+adText = "OPTIMIZE YOUR RESUME";
+adSub = "You're ready to apply. Don't get filtered.";
+}
 
-            document.getElementById('final-summary').innerText = stats.summary;
-            document.getElementById('tips-list').innerHTML = stats.tips.map(t => `<li>> ${t}</li>`).join('');
+container.innerHTML = `
+<a href="${adLink}" target="_blank" class="block group relative overflow-hidden rounded border border-cyan-500/30 bg-cyan-900/10 p-4 transition-all hover:bg-cyan-900/20 hover:border-cyan-500">
+<div class="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-cyan-500/20 blur-xl transition-all group-hover:bg-cyan-500/30"></div>
+<div class="relative flex items-center justify-between">
+<div>
+<div class="text-[10px] font-bold uppercase tracking-widest text-cyan-400 mb-1">${adSub}</div>
+<div class="text-lg font-bold text-white group-hover:text-cyan-200">${adText} &rarr;</div>
+</div>
+<div class="h-8 w-8 rounded-full border border-cyan-500/50 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+</div>
+</div>
+</a>
+`;
 
-            const container = document.getElementById('affiliate-container');
-            let adLink = "https://www.tryexponent.com/?ref=YOUR_ID";
-            let adText = "MASTER SYSTEM DESIGN";
-            let adSub = "Recommended Course";
+playTone(600, 'sine', 0.5);
+}
 
-            if(stats.score >= 80) {
-                adLink = "https://resume.io/?ref=YOUR_ID";
-                adText = "OPTIMIZE YOUR RESUME";
-                adSub = "You're ready to apply. Don't get filtered.";
-            }
+function downloadReport() {
+const txt = history.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n\n');
+const blob = new Blob([txt], { type: 'text/plain' });
+const url = window.URL.createObjectURL(blob);
+const a = document.createElement('a');
+a.href = url;
+a.download = 'Anterview_Report_X99.txt';
+a.click();
+}
+</script>
 
-            container.innerHTML = `
-                <a href="${adLink}" target="_blank" class="block group relative overflow-hidden rounded border border-cyan-500/30 bg-cyan-900/10 p-4 transition-all hover:bg-cyan-900/20 hover:border-cyan-500">
-                    <div class="absolute -right-4 -top-4 h-16 w-16 rounded-full bg-cyan-500/20 blur-xl transition-all group-hover:bg-cyan-500/30"></div>
-                    <div class="relative flex items-center justify-between">
-                        <div>
-                            <div class="text-[10px] font-bold uppercase tracking-widest text-cyan-400 mb-1">${adSub}</div>
-                            <div class="text-lg font-bold text-white group-hover:text-cyan-200">${adText} &rarr;</div>
-                        </div>
-                        <div class="h-8 w-8 rounded-full border border-cyan-500/50 flex items-center justify-center text-cyan-400 group-hover:scale-110 transition-transform">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </div>
-                    </div>
-                </a>
-            `;
+<script>
+let selectedMode = 'free';
 
-            playTone(600, 'sine', 0.5);
-        }
+function selectMode(el, mode) {
+document.querySelectorAll('#setup-view .border-cyan-500\\/50').forEach(c => {
+c.className = "p-4 border border-white/10 bg-black/40 rounded cursor-pointer hover:bg-white/5 transition-colors";
+if(c.querySelector('.text-cyan-400')) {
+c.querySelector('.text-cyan-400').className = "text-slate-400 font-bold text-sm mb-1";
+}
+});
 
-        function downloadReport() {
-            const txt = history.map(m => `${m.role.toUpperCase()}: ${m.content}`).join('\n\n');
-            const blob = new Blob([txt], { type: 'text/plain' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Anterview_Report_X99.txt';
-            a.click();
-        }
-    </script>
+el.className = "p-4 border border-cyan-500/50 bg-cyan-500/5 rounded cursor-pointer transition-colors shadow-[0_0_15px_rgba(0,245,255,0.1)]";
+el.querySelector('.font-bold').className = "text-cyan-400 font-bold text-sm mb-1";
 
-    <script>
-        let selectedMode = 'free';
+selectedMode = mode;
+playTone(600, 'sine', 0.05);
+}
 
-        function selectMode(el, mode) {
-            document.querySelectorAll('#setup-view .border-cyan-500\\/50').forEach(c => {
-                c.className = "p-4 border border-white/10 bg-black/40 rounded cursor-pointer hover:bg-white/5 transition-colors";
-                if(c.querySelector('.text-cyan-400')) {
-                    c.querySelector('.text-cyan-400').className = "text-slate-400 font-bold text-sm mb-1";
-                }
-            });
+let keyBuffer = "";
+const secretWord = "mimimami";
 
-            el.className = "p-4 border border-cyan-500/50 bg-cyan-500/5 rounded cursor-pointer transition-colors shadow-[0_0_15px_rgba(0,245,255,0.1)]";
-            el.querySelector('.font-bold').className = "text-cyan-400 font-bold text-sm mb-1";
+document.addEventListener('keydown', (e) => {
+keyBuffer += e.key;
+if (keyBuffer.length > 50) keyBuffer = keyBuffer.slice(-20);
 
-            selectedMode = mode;
-            playTone(600, 'sine', 0.05);
-        }
+if (keyBuffer.includes(secretWord)) {
+openDevConsole();
+keyBuffer = "";
+}
+});
 
-        let keyBuffer = "";
-        const secretWord = "mimimami";
+const consoleOverlay = document.getElementById('dev-console-overlay');
+const passwordInput = document.getElementById('dev-password-input');
+const errorMsg = document.getElementById('dev-error');
 
-        document.addEventListener('keydown', (e) => {
-            keyBuffer += e.key;
-            if (keyBuffer.length > 50) keyBuffer = keyBuffer.slice(-20);
+function openDevConsole() {
+consoleOverlay.style.display = 'flex';
+passwordInput.value = '';
+passwordInput.focus();
+}
 
-            if (keyBuffer.includes(secretWord)) {
-                openDevConsole();
-                keyBuffer = "";
-            }
-        });
+consoleOverlay.addEventListener('click', (e) => {
+if (e.target === consoleOverlay) {
+consoleOverlay.style.display = 'none';
+errorMsg.style.display = 'none';
+}
+});
 
-        const consoleOverlay = document.getElementById('dev-console-overlay');
-        const passwordInput = document.getElementById('dev-password-input');
-        const errorMsg = document.getElementById('dev-error');
+passwordInput.addEventListener('keypress', (e) => {
+if (e.key === 'Enter') {
+const code = passwordInput.value.trim();
 
-        function openDevConsole() {
-            consoleOverlay.style.display = 'flex';
-            passwordInput.value = '';
-            passwordInput.focus();
-        }
+if (code === 'geper') {
+activateGodMode();
+}
+else if (code === 'freecourse') {
+unlockPro();
+}
+else {
+errorMsg.style.display = 'block';
+passwordInput.style.borderBottom = '1px solid red';
+playTone(150, 'sawtooth', 0.3);
+}
+}
+});
 
-        consoleOverlay.addEventListener('click', (e) => {
-            if (e.target === consoleOverlay) {
-                consoleOverlay.style.display = 'none';
-                errorMsg.style.display = 'none';
-            }
-        });
+function activateGodMode() {
+consoleOverlay.style.display = 'none';
+isGodMode = true;
+const netMon = document.getElementById('network-monitor');
+netMon.style.display = 'block';
 
-        passwordInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                const code = passwordInput.value.trim();
+document.body.style.fontFamily = "'Courier New', monospace";
+alert("🔓 GOD MODE UNLOCKED: Network Monitor Active");
+console.log("Welcome back, Creator.");
+}
 
-                if (code === 'geper') {
-                    activateGodMode();
-                }
-                else if (code === 'freecourse') {
-                    unlockPro();
-                }
-                else {
-                    errorMsg.style.display = 'block';
-                    passwordInput.style.borderBottom = '1px solid red';
-                    playTone(150, 'sawtooth', 0.3);
-                }
-            }
-        });
+function unlockPro() {
+consoleOverlay.style.display = 'none';
+const card = document.getElementById('pro-card');
+const badge = card.querySelector('.locked-badge');
 
-        function activateGodMode() {
-            consoleOverlay.style.display = 'none';
-            isGodMode = true;
-            const netMon = document.getElementById('network-monitor');
-            netMon.style.display = 'block';
+card.classList.remove('locked-option', 'bg-black/40', 'border-white/10');
+card.classList.add('cursor-pointer', 'border-purple-500', 'bg-purple-900/20', 'hover:bg-purple-900/40');
 
-            document.body.style.fontFamily = "'Courier New', monospace";
-            alert("🔓 GOD MODE UNLOCKED: Network Monitor Active");
-            console.log("Welcome back, Creator.");
-        }
+badge.innerText = "UNLOCKED";
+badge.style.backgroundColor = "#a855f7";
+badge.style.color = "#fff";
 
-        function unlockPro() {
-            consoleOverlay.style.display = 'none';
-            const card = document.getElementById('pro-card');
-            const badge = card.querySelector('.locked-badge');
+const title = card.querySelector('.text-slate-500');
+if(title) title.classList.replace('text-slate-500', 'text-purple-400');
 
-            card.classList.remove('locked-option', 'bg-black/40', 'border-white/10');
-            card.classList.add('cursor-pointer', 'border-purple-500', 'bg-purple-900/20', 'hover:bg-purple-900/40');
+card.setAttribute('onclick', "selectMode(this, 'pro')");
 
-            badge.innerText = "UNLOCKED";
-            badge.style.backgroundColor = "#a855f7";
-            badge.style.color = "#fff";
+playTone(400, 'square', 0.1);
+setTimeout(() => playTone(600, 'square', 0.1), 100);
+setTimeout(() => playTone(800, 'square', 0.2), 200);
 
-            const title = card.querySelector('.text-slate-500');
-            if(title) title.classList.replace('text-slate-500', 'text-purple-400');
+alert("🔓 CHEAT CODE ACCEPTED: FAANG SIMULATION UNLOCKED");
+}
+</script>
 
-            card.setAttribute('onclick', "selectMode(this, 'pro')");
+<script>
+function setTheme(color) {
+const root = document.documentElement;
+const themes = {
+cyan: ['#00f5ff', '#00f5ff'],
+red: ['#ef4444', '#ef4444'],
+green: ['#22c55e', '#22c55e'],
+amber: ['#f59e0b', '#f59e0b'],
+white: ['#ffffff', '#f8fafc']
+};
 
-            playTone(400, 'square', 0.1);
-            setTimeout(() => playTone(600, 'square', 0.1), 100);
-            setTimeout(() => playTone(800, 'square', 0.2), 200);
+const [neon, text] = themes[color];
 
-            alert("🔓 CHEAT CODE ACCEPTED: FAANG SIMULATION UNLOCKED");
-        }
-    </script>
+root.style.setProperty('--neon-cyan', neon);
 
-    <script>
-        function setTheme(color) {
-            const root = document.documentElement;
-            const themes = {
-                cyan: ['#00f5ff', '#00f5ff'],
-                red: ['#ef4444', '#ef4444'],
-                green: ['#22c55e', '#22c55e'],
-                amber: ['#f59e0b', '#f59e0b'],
-                white: ['#ffffff', '#f8fafc']
-            };
+playTone(color === 'red' ? 100 : 500, 'square', 0.1);
 
-            const [neon, text] = themes[color];
+let style = document.getElementById('theme-override');
+if (!style) {
+style = document.createElement('style');
+style.id = 'theme-override';
+document.head.appendChild(style);
+}
 
-            root.style.setProperty('--neon-cyan', neon);
+style.innerHTML = `
+.text-cyan-500, .text-cyan-400 { color: ${neon} !important; }
+.bg-cyan-500 { background-color: ${neon} !important; }
+.border-cyan-500, .border-cyan-500\\/50, .border-cyan-500\\/30, .border-cyan-500\\/20 { border-color: ${neon} !important; }
+.bg-cyan-900\\/30 { background-color: ${color === 'white' ? '#334155' : neon}20 !important; }
+.text-cyan-50 { color: ${color === 'white' ? '#000' : '#fff'} !important; }
+.shadow-\\[0_0_40px_rgba\\(0\\,245\\,255\\,0\\.05\\)\\] { box-shadow: 0 0 40px ${neon}0d !important; }
 
-            playTone(color === 'red' ? 100 : 500, 'square', 0.1);
+.sci-input:focus { box-shadow: 0 0 15px ${neon}40 !important; border-color: ${neon} !important; }
+.sci-btn { background: ${neon} !important; color: ${color === 'white' ? '#000' : '#000'} !important; }
+.sci-btn:hover { box-shadow: 0 0 30px ${neon} !important; background: #fff !important; }
+`;
+}
+</script>
 
-            let style = document.getElementById('theme-override');
-            if (!style) {
-                style = document.createElement('style');
-                style.id = 'theme-override';
-                document.head.appendChild(style);
-            }
+<script>
+(function(){
+const layer = document.getElementById('toast-layer');
+function toast(header, body, ms=2600){
+const t = document.createElement('div');
+t.className = 'toast';
+t.innerHTML = `
+<div class="h"><span style="color:var(--neon-cyan)">>> </span><span>${header}</span></div>
+<div class="b">${body}</div>
+<div class="bar"><i></i></div>
+`;
+layer.appendChild(t);
+gsap.fromTo(t, {opacity:0, y:-10, scale:0.98}, {opacity:1, y:0, scale:1, duration:0.35, ease:"power3.out"});
+const bar = t.querySelector('.bar > i');
+gsap.fromTo(bar, {scaleX:1}, {scaleX:0, duration: ms/1000, ease:"none"});
+setTimeout(()=> {
+gsap.to(t, {opacity:0, y:-8, scale:0.98, duration:0.28, ease:"power2.in", onComplete:()=>t.remove()});
+}, ms);
+}
+window.__toast = toast;
 
-            style.innerHTML = `
-                .text-cyan-500, .text-cyan-400 { color: ${neon} !important; }
-                .bg-cyan-500 { background-color: ${neon} !important; }
-                .border-cyan-500, .border-cyan-500\\/50, .border-cyan-500\\/30, .border-cyan-500\\/20 { border-color: ${neon} !important; }
-                .bg-cyan-900\\/30 { background-color: ${color === 'white' ? '#334155' : neon}20 !important; }
-                .text-cyan-50 { color: ${color === 'white' ? '#000' : '#fff'} !important; }
-                .shadow-\\[0_0_40px_rgba\\(0\\,245\\,255\\,0\\.05\\)\\] { box-shadow: 0 0 40px ${neon}0d !important; }
+const nativeAlert = window.alert.bind(window);
+window.alert = function(msg){
+const s = String(msg ?? "");
+const isDevMsg = s.includes("GOD MODE UNLOCKED") || s.includes("CHEAT CODE ACCEPTED") || s.includes("Network Monitor Active") || s.includes("FAANG SIMULATION UNLOCKED");
+if(isDevMsg){
+try { toast("DEV_CONSOLE", s.replace("🔓 ","")); } catch(e){}
+return;
+}
+return nativeAlert(msg);
+};
+})();
+</script>
 
-                .sci-input:focus { box-shadow: 0 0 15px ${neon}40 !important; border-color: ${neon} !important; }
-                .sci-btn { background: ${neon} !important; color: ${color === 'white' ? '#000' : '#000'} !important; }
-                .sci-btn:hover { box-shadow: 0 0 30px ${neon} !important; background: #fff !important; }
-            `;
-        }
-    </script>
+<script>
+(function(){
+window.__proUnlocked = false;
+if(typeof unlockPro === "function"){
+const _unlockPro = unlockPro;
+unlockPro = function(){
+const r = _unlockPro();
+window.__proUnlocked = true;
+try { window.__toast && window.__toast("PROTOCOL", "FAANG SIMULATION: ACCESS GRANTED"); } catch(e){}
+return r;
+}
+}
+})();
+</script>
 
-    <script>
-        (function(){
-            const layer = document.getElementById('toast-layer');
-            function toast(header, body, ms=2600){
-                const t = document.createElement('div');
-                t.className = 'toast';
-                t.innerHTML = `
-                    <div class="h"><span style="color:var(--neon-cyan)">>> </span><span>${header}</span></div>
-                    <div class="b">${body}</div>
-                    <div class="bar"><i></i></div>
-                `;
-                layer.appendChild(t);
-                gsap.fromTo(t, {opacity:0, y:-10, scale:0.98}, {opacity:1, y:0, scale:1, duration:0.35, ease:"power3.out"});
-                const bar = t.querySelector('.bar > i');
-                gsap.fromTo(bar, {scaleX:1}, {scaleX:0, duration: ms/1000, ease:"none"});
-                setTimeout(()=> {
-                    gsap.to(t, {opacity:0, y:-8, scale:0.98, duration:0.28, ease:"power2.in", onComplete:()=>t.remove()});
-                }, ms);
-            }
-            window.__toast = toast;
+<script>
+(function(){
+window.__selectedPersona = "herman";
+const personas = [
+{ id:"herman", name:"HERMAN", tag:"BRUTAL", desc:"Cuts fluff. Roasts vague answers. Forces specifics.", pro:false },
+{ id:"vex", name:"VEX", tag:"ADVERSARIAL", desc:"Interrupts, challenges assumptions, digs for edge-cases.", pro:false },
+{ id:"aegis", name:"AEGIS", tag:"SYSTEMS", desc:"Obsessed with tradeoffs, reliability, SLOs, failure modes.", pro:false },
+{ id:"mira", name:"MIRA", tag:"COACH", desc:"Supportive but strict. Gives micro-feedback and upgrades your answer.", pro:false },
+{ id:"nyx", name:"NYX", tag:"RAPID-FIRE", desc:"Short questions, fast follow-ups, no downtime.", pro:false },
+{ id:"committee", name:"L5 COMMITTEE", tag:"FAANG", desc:"Calibration-heavy. Signals, scope, impact, leadership.", pro:true },
+{ id:"barraiser", name:"BAR-RAISER", tag:"AMAZON", desc:"Principles-driven probing. Evidence > vibes.", pro:true },
+{ id:"pragmatist", name:"PRAGMATIST", tag:"PROD", desc:"Shipping mindset. Costs, latency, ops, on-call reality.", pro:true }
+];
 
-            const nativeAlert = window.alert.bind(window);
-            window.alert = function(msg){
-                const s = String(msg ?? "");
-                const isDevMsg = s.includes("GOD MODE UNLOCKED") || s.includes("CHEAT CODE ACCEPTED") || s.includes("Network Monitor Active") || s.includes("FAANG SIMULATION UNLOCKED");
-                if(isDevMsg){
-                    try { toast("DEV_CONSOLE", s.replace("🔓 ","")); } catch(e){}
-                    return;
-                }
-                return nativeAlert(msg);
-            };
-        })();
-    </script>
+function mountPersonaDock(){
+const setup = document.getElementById('setup-stack');
+if(!setup) return;
 
-    <script>
-        (function(){
-            window.__proUnlocked = false;
-            if(typeof unlockPro === "function"){
-                const _unlockPro = unlockPro;
-                unlockPro = function(){
-                    const r = _unlockPro();
-                    window.__proUnlocked = true;
-                    try { window.__toast && window.__toast("PROTOCOL", "FAANG SIMULATION: ACCESS GRANTED"); } catch(e){}
-                    return r;
-                }
-            }
-        })();
-    </script>
+const techBlock = document.getElementById('stack')?.closest('div');
+if(!techBlock) return;
 
-    <script>
-        (function(){
-            window.__selectedPersona = "herman";
-            const personas = [
-                { id:"herman", name:"HERMAN", tag:"BRUTAL", desc:"Cuts fluff. Roasts vague answers. Forces specifics.", pro:false },
-                { id:"vex", name:"VEX", tag:"ADVERSARIAL", desc:"Interrupts, challenges assumptions, digs for edge-cases.", pro:false },
-                { id:"aegis", name:"AEGIS", tag:"SYSTEMS", desc:"Obsessed with tradeoffs, reliability, SLOs, failure modes.", pro:false },
-                { id:"mira", name:"MIRA", tag:"COACH", desc:"Supportive but strict. Gives micro-feedback and upgrades your answer.", pro:false },
-                { id:"nyx", name:"NYX", tag:"RAPID-FIRE", desc:"Short questions, fast follow-ups, no downtime.", pro:false },
-                { id:"committee", name:"L5 COMMITTEE", tag:"FAANG", desc:"Calibration-heavy. Signals, scope, impact, leadership.", pro:true },
-                { id:"barraiser", name:"BAR-RAISER", tag:"AMAZON", desc:"Principles-driven probing. Evidence > vibes.", pro:true },
-                { id:"pragmatist", name:"PRAGMATIST", tag:"PROD", desc:"Shipping mindset. Costs, latency, ops, on-call reality.", pro:true }
-            ];
+const wrap = document.createElement('div');
+wrap.id = "persona-dock";
+wrap.className = "glass-panel rounded-lg p-4 border border-white/10";
+wrap.style.background = "rgba(0,0,0,0.18)";
+wrap.innerHTML = `
+<div class="flex items-center justify-between mb-2">
+<div>
+<div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Personality Matrix</div>
+<div class="text-[9px] mono text-slate-500 opacity-70 mt-1">Scroll sideways. Click to arm persona.</div>
+</div>
+<div class="flex items-center gap-2">
+<button id="persona-left" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">◀</button>
+<button id="persona-right" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">▶</button>
+</div>
+</div>
+<div class="persona-fade">
+<div id="persona-strip" class="persona-strip persona-scroll"></div>
+</div>
+`;
 
-            function mountPersonaDock(){
-                const setup = document.getElementById('setup-stack');
-                if(!setup) return;
+setup.insertBefore(wrap, techBlock);
 
-                const techBlock = document.getElementById('stack')?.closest('div');
-                if(!techBlock) return;
+const strip = wrap.querySelector('#persona-strip');
 
-                const wrap = document.createElement('div');
-                wrap.id = "persona-dock";
-                wrap.className = "glass-panel rounded-lg p-4 border border-white/10";
-                wrap.style.background = "rgba(0,0,0,0.18)";
-                wrap.innerHTML = `
-                    <div class="flex items-center justify-between mb-2">
-                        <div>
-                            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Personality Matrix</div>
-                            <div class="text-[9px] mono text-slate-500 opacity-70 mt-1">Scroll sideways. Click to arm persona.</div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button id="persona-left" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">◀</button>
-                            <button id="persona-right" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">▶</button>
-                        </div>
-                    </div>
-                    <div class="persona-fade">
-                        <div id="persona-strip" class="persona-strip persona-scroll"></div>
-                    </div>
-                `;
+function render(){
+strip.innerHTML = "";
+personas.forEach(p=>{
+const locked = p.pro && !window.__proUnlocked;
+const card = document.createElement('button');
+card.type = "button";
+card.className = "persona-card text-left";
+card.dataset.persona = p.id;
+card.innerHTML = `
+${locked ? `<div class="persona-lock">PRO</div>` : ``}
+<div class="flex items-center justify-between gap-3">
+<div class="persona-title text-sm">${p.name}</div>
+<div class="persona-tag mono" style="border-color:${p.id===window.__selectedPersona?'rgba(0,245,255,0.45)':'rgba(255,255,255,0.12)'}">${p.tag}</div>
+</div>
+<div class="persona-desc mono mt-2">${p.desc}</div>
+`;
+if(p.id === window.__selectedPersona) card.classList.add('active');
+if(locked){
+card.style.opacity = "0.6";
+card.style.cursor = "not-allowed";
+}
+card.addEventListener('click', ()=>{
+if(locked){
+sfxAlert();
+gsap.fromTo(card, {x:0}, {x:8, yoyo:true, repeat:5, duration:0.06, ease:"power1.inOut"});
+window.__toast && window.__toast("LOCKED", "Requires PRO unlock (use your console override).", 2200);
+return;
+}
+window.__selectedPersona = p.id;
+[...strip.querySelectorAll('.persona-card')].forEach(x=>x.classList.remove('active'));
+card.classList.add('active');
+playTone(620, 'sine', 0.06);
+gsap.fromTo(card, {scale:0.995}, {scale:1.01, duration:0.18, yoyo:true, repeat:1, ease:"power2.out"});
+window.__toast && window.__toast("PERSONA_ARMED", `${p.name} :: ${p.tag}`, 1600);
+});
+strip.appendChild(card);
+});
 
-                setup.insertBefore(wrap, techBlock);
+gsap.fromTo(strip.children, {opacity:0, y:8}, {opacity:1, y:0, duration:0.35, ease:"power2.out", stagger:0.03});
+}
 
-                const strip = wrap.querySelector('#persona-strip');
+render();
 
-                function render(){
-                    strip.innerHTML = "";
-                    personas.forEach(p=>{
-                        const locked = p.pro && !window.__proUnlocked;
-                        const card = document.createElement('button');
-                        card.type = "button";
-                        card.className = "persona-card text-left";
-                        card.dataset.persona = p.id;
-                        card.innerHTML = `
-                            ${locked ? `<div class="persona-lock">PRO</div>` : ``}
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="persona-title text-sm">${p.name}</div>
-                                <div class="persona-tag mono" style="border-color:${p.id===window.__selectedPersona?'rgba(0,245,255,0.45)':'rgba(255,255,255,0.12)'}">${p.tag}</div>
-                            </div>
-                            <div class="persona-desc mono mt-2">${p.desc}</div>
-                        `;
-                        if(p.id === window.__selectedPersona) card.classList.add('active');
-                        if(locked){
-                            card.style.opacity = "0.6";
-                            card.style.cursor = "not-allowed";
-                        }
-                        card.addEventListener('click', ()=>{
-                            if(locked){
-                                sfxAlert();
-                                gsap.fromTo(card, {x:0}, {x:8, yoyo:true, repeat:5, duration:0.06, ease:"power1.inOut"});
-                                window.__toast && window.__toast("LOCKED", "Requires PRO unlock (use your console override).", 2200);
-                                return;
-                            }
-                            window.__selectedPersona = p.id;
-                            [...strip.querySelectorAll('.persona-card')].forEach(x=>x.classList.remove('active'));
-                            card.classList.add('active');
-                            playTone(620, 'sine', 0.06);
-                            gsap.fromTo(card, {scale:0.995}, {scale:1.01, duration:0.18, yoyo:true, repeat:1, ease:"power2.out"});
-                            window.__toast && window.__toast("PERSONA_ARMED", `${p.name} :: ${p.tag}`, 1600);
-                        });
-                        strip.appendChild(card);
-                    });
+const left = wrap.querySelector('#persona-left');
+const right = wrap.querySelector('#persona-right');
+left.addEventListener('click', ()=> strip.scrollBy({left:-260, behavior:"smooth"}));
+right.addEventListener('click', ()=> strip.scrollBy({left:260, behavior:"smooth"}));
 
-                    gsap.fromTo(strip.children, {opacity:0, y:8}, {opacity:1, y:0, duration:0.35, ease:"power2.out", stagger:0.03});
-                }
+const _selectMode = window.selectMode;
+window.selectMode = function(el, mode){
+const r = _selectMode(el, mode);
+render();
+return r;
+};
+}
 
-                render();
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountPersonaDock);
+else mountPersonaDock();
+})();
+</script>
 
-                const left = wrap.querySelector('#persona-left');
-                const right = wrap.querySelector('#persona-right');
-                left.addEventListener('click', ()=> strip.scrollBy({left:-260, behavior:"smooth"}));
-                right.addEventListener('click', ()=> strip.scrollBy({left:260, behavior:"smooth"}));
+<script>
+(function(){
+function buildPrompt(job, stack){
+const p = String(window.__selectedPersona || "herman");
+const personaPrompts = {
+herman: `You are Herman, a brutal technical interviewer.`,
+vex: `You are Vex, an adversarial technical interviewer who aggressively challenges assumptions and hunts edge-cases.`,
+aegis: `You are Aegis, a systems-focused interviewer obsessed with reliability, SLOs, failure modes, and tradeoffs.`,
+mira: `You are Mira, a strict but supportive interviewer: concise coaching, then a harder follow-up.`,
+nyx: `You are Nyx, a rapid-fire interviewer: short questions, fast follow-ups, no long speeches.`,
+committee: `You are a Google L5 hiring committee simulator: calibration-focused, scope/impact/leadership signals, and precise evaluation.`,
+barraiser: `You are an Amazon Bar Raiser simulator: leadership principles probing, evidence-driven, and skeptical of hand-wavy claims.`,
+pragmatist: `You are a pragmatic production interviewer: cost, latency, observability, and operational reality first.`
+};
 
-                const _selectMode = window.selectMode;
-                window.selectMode = function(el, mode){
-                    const r = _selectMode(el, mode);
-                    render();
-                    return r;
-                };
-            }
+const base = personaPrompts[p] || personaPrompts.herman;
 
-            if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", mountPersonaDock);
-            else mountPersonaDock();
-        })();
-    </script>
-
-    <script>
-        (function(){
-            function buildPrompt(job, stack){
-                const p = String(window.__selectedPersona || "herman");
-                const personaPrompts = {
-                    herman: `You are Herman, a brutal technical interviewer.`,
-                    vex: `You are Vex, an adversarial technical interviewer who aggressively challenges assumptions and hunts edge-cases.`,
-                    aegis: `You are Aegis, a systems-focused interviewer obsessed with reliability, SLOs, failure modes, and tradeoffs.`,
-                    mira: `You are Mira, a strict but supportive interviewer: concise coaching, then a harder follow-up.`,
-                    nyx: `You are Nyx, a rapid-fire interviewer: short questions, fast follow-ups, no long speeches.`,
-                    committee: `You are a Google L5 hiring committee simulator: calibration-focused, scope/impact/leadership signals, and precise evaluation.`,
-                    barraiser: `You are an Amazon Bar Raiser simulator: leadership principles probing, evidence-driven, and skeptical of hand-wavy claims.`,
-                    pragmatist: `You are a pragmatic production interviewer: cost, latency, observability, and operational reality first.`
-                };
-
-                const base = personaPrompts[p] || personaPrompts.herman;
-
-                const rules = `
+const rules = `
 RULES:
 1. Ask ONE hard question at a time.
 2. Max 5 questions total.
@@ -1039,387 +1041,387 @@ RULES:
 4. Keep responses compact but intense. No essays.
 5. End the last message with [END].`;
 
-                return `${base} Job: ${job}. Stack: ${stack}.${rules}`;
-            }
+return `${base} Job: ${job}. Stack: ${stack}.${rules}`;
+}
 
-            window.buildPrompt = buildPrompt;
+window.buildPrompt = buildPrompt;
 
-            if(typeof callAI === "function"){
-                const _callAI = callAI;
-                callAI = async function(msg){
-                    try{
-                        if(Array.isArray(history) && history.length > 0 && history[0].role === "system" && !window.__promptPatched){
-                            const job = document.getElementById('job-title')?.value || "Engineer";
-                            const stack = document.getElementById('stack')?.value || "General";
-                            history[0].content = buildPrompt(job, stack);
-                            window.__promptPatched = true;
-                        }
-                    } catch(e){}
-                    return _callAI(msg);
-                }
-            }
-        })();
-    </script>
+if(typeof callAI === "function"){
+const _callAI = callAI;
+callAI = async function(msg){
+try{
+if(Array.isArray(history) && history.length > 0 && history[0].role === "system" && !window.__promptPatched){
+const job = document.getElementById('job-title')?.value || "Engineer";
+const stack = document.getElementById('stack')?.value || "General";
+history[0].content = buildPrompt(job, stack);
+window.__promptPatched = true;
+}
+} catch(e){}
+return _callAI(msg);
+}
+}
+})();
+</script>
 
-    <script>
-        (function(){
-            const I18N = {
-                en: {
-                    label_job: "Target Vector (Job Title)",
-                    placeholder_job: "e.g. Senior Solidity Engineer",
-                    label_stack: "Tech Stack",
-                    btn_init: "INITIALIZE",
-                    sys_logs: "SYSTEM LOGS",
-                    stress: "Stress Monitor",
-                    progress: "Question Progress",
-                    feedback: "LIVE FEEDBACK",
-                    input_placeholder: "Type your response...",
-                    ai_processing: "AI PROCESSING...",
-                    session: "SESSION ID:",
-                    encrypted: "ENCRYPTED CONNECTION",
-                    themes: "THEME_OS:",
-                    lang_matrix: "Language Matrix",
-                    lang_hint: "Scroll sideways. Click to switch UI language.",
-                    toast_lang: "LANGUAGE_SET"
-                },
-                ru: {
-                    label_job: "Цель (Должность)",
-                    placeholder_job: "например: Senior Solidity Engineer",
-                    label_stack: "Технологии",
-                    btn_init: "ЗАПУСК",
-                    sys_logs: "СИСТЕМНЫЕ ЛОГИ",
-                    stress: "Монитор Стресса",
-                    progress: "Прогресс Вопросов",
-                    feedback: "ЖИВАЯ ОЦЕНКА",
-                    input_placeholder: "Введите ответ...",
-                    ai_processing: "ИИ ОБРАБАТЫВАЕТ...",
-                    session: "СЕССИЯ:",
-                    encrypted: "ШИФРОВАННОЕ СОЕДИНЕНИЕ",
-                    themes: "ТЕМА_OS:",
-                    lang_matrix: "Матрица Языков",
-                    lang_hint: "Листай вправо. Клик — язык интерфейса.",
-                    toast_lang: "ЯЗЫК"
-                },
-                ro: {
-                    label_job: "Țintă (Funcție)",
-                    placeholder_job: "ex: Senior Solidity Engineer",
-                    label_stack: "Stack Tehnic",
-                    btn_init: "INIȚIALIZEAZĂ",
-                    sys_logs: "JURNALE SISTEM",
-                    stress: "Monitor Stres",
-                    progress: "Progres Întrebări",
-                    feedback: "FEEDBACK LIVE",
-                    input_placeholder: "Scrie răspunsul...",
-                    ai_processing: "AI PROCSEAZĂ...",
-                    session: "ID SESIUNE:",
-                    encrypted: "CONEXIUNE CRIPTATĂ",
-                    themes: "TEMĂ_OS:",
-                    lang_matrix: "Matrice Limbi",
-                    lang_hint: "Derulează lateral. Click pentru limbă UI.",
-                    toast_lang: "LIMBĂ"
-                },
-                uk: {
-                    label_job: "Ціль (Посада)",
-                    placeholder_job: "напр: Senior Solidity Engineer",
-                    label_stack: "Тех Стек",
-                    btn_init: "ІНІЦІАЛІЗУВАТИ",
-                    sys_logs: "СИСТЕМНІ ЛОГИ",
-                    stress: "Монітор Стресу",
-                    progress: "Прогрес Питань",
-                    feedback: "ЖИВИЙ ФІДБЕК",
-                    input_placeholder: "Введіть відповідь...",
-                    ai_processing: "ШІ ОБРОБЛЯЄ...",
-                    session: "ID СЕСІЇ:",
-                    encrypted: "ЗАШИФРОВАНЕ ЗʼЄДНАННЯ",
-                    themes: "ТЕМА_OS:",
-                    lang_matrix: "Матриця Мов",
-                    lang_hint: "Гортай боком. Клік — мова UI.",
-                    toast_lang: "МОВА"
-                },
-                es: {
-                    label_job: "Objetivo (Puesto)",
-                    placeholder_job: "ej: Senior Solidity Engineer",
-                    label_stack: "Stack Tecnológico",
-                    btn_init: "INICIALIZAR",
-                    sys_logs: "REGISTROS DEL SISTEMA",
-                    stress: "Monitor de Estrés",
-                    progress: "Progreso de Preguntas",
-                    feedback: "FEEDBACK EN VIVO",
-                    input_placeholder: "Escribe tu respuesta...",
-                    ai_processing: "IA PROCESANDO...",
-                    session: "ID SESIÓN:",
-                    encrypted: "CONEXIÓN CIFRADA",
-                    themes: "TEMA_OS:",
-                    lang_matrix: "Matriz de Idiomas",
-                    lang_hint: "Desliza lateral. Click para idioma UI.",
-                    toast_lang: "IDIOMA"
-                },
-                fr: {
-                    label_job: "Cible (Poste)",
-                    placeholder_job: "ex : Senior Solidity Engineer",
-                    label_stack: "Stack Technique",
-                    btn_init: "INITIALISER",
-                    sys_logs: "JOURNAUX SYSTÈME",
-                    stress: "Moniteur de Stress",
-                    progress: "Progression Questions",
-                    feedback: "RETOUR EN DIRECT",
-                    input_placeholder: "Tapez votre réponse...",
-                    ai_processing: "IA EN COURS...",
-                    session: "ID SESSION :",
-                    encrypted: "CONNEXION CHIFFRÉE",
-                    themes: "THÈME_OS :",
-                    lang_matrix: "Matrice des Langues",
-                    lang_hint: "Faites défiler. Clic pour langue UI.",
-                    toast_lang: "LANGUE"
-                },
-                de: {
-                    label_job: "Ziel (Jobtitel)",
-                    placeholder_job: "z.B. Senior Solidity Engineer",
-                    label_stack: "Tech-Stack",
-                    btn_init: "INITIALISIEREN",
-                    sys_logs: "SYSTEM-LOGS",
-                    stress: "Stressmonitor",
-                    progress: "Fragenfortschritt",
-                    feedback: "LIVE-FEEDBACK",
-                    input_placeholder: "Antwort eingeben...",
-                    ai_processing: "KI VERARBEITET...",
-                    session: "SESSION-ID:",
-                    encrypted: "VERSCHLÜSSELTE VERBINDUNG",
-                    themes: "THEME_OS:",
-                    lang_matrix: "Sprachmatrix",
-                    lang_hint: "Seitlich scrollen. Klick für UI-Sprache.",
-                    toast_lang: "SPRACHE"
-                }
-            };
+<script>
+(function(){
+const I18N = {
+en: {
+label_job: "Target Vector (Job Title)",
+placeholder_job: "e.g. Senior Solidity Engineer",
+label_stack: "Tech Stack",
+btn_init: "INITIALIZE",
+sys_logs: "SYSTEM LOGS",
+stress: "Stress Monitor",
+progress: "Question Progress",
+feedback: "LIVE FEEDBACK",
+input_placeholder: "Type your response...",
+ai_processing: "AI PROCESSING...",
+session: "SESSION ID:",
+encrypted: "ENCRYPTED CONNECTION",
+themes: "THEME_OS:",
+lang_matrix: "Language Matrix",
+lang_hint: "Scroll sideways. Click to switch UI language.",
+toast_lang: "LANGUAGE_SET"
+},
+ru: {
+label_job: "Цель (Должность)",
+placeholder_job: "например: Senior Solidity Engineer",
+label_stack: "Технологии",
+btn_init: "ЗАПУСК",
+sys_logs: "СИСТЕМНЫЕ ЛОГИ",
+stress: "Монитор Стресса",
+progress: "Прогресс Вопросов",
+feedback: "ЖИВАЯ ОЦЕНКА",
+input_placeholder: "Введите ответ...",
+ai_processing: "ИИ ОБРАБАТЫВАЕТ...",
+session: "СЕССИЯ:",
+encrypted: "ШИФРОВАННОЕ СОЕДИНЕНИЕ",
+themes: "ТЕМА_OS:",
+lang_matrix: "Матрица Языков",
+lang_hint: "Листай вправо. Клик — язык интерфейса.",
+toast_lang: "ЯЗЫК"
+},
+ro: {
+label_job: "Țintă (Funcție)",
+placeholder_job: "ex: Senior Solidity Engineer",
+label_stack: "Stack Tehnic",
+btn_init: "INIȚIALIZEAZĂ",
+sys_logs: "JURNALE SISTEM",
+stress: "Monitor Stres",
+progress: "Progres Întrebări",
+feedback: "FEEDBACK LIVE",
+input_placeholder: "Scrie răspunsul...",
+ai_processing: "AI PROCSEAZĂ...",
+session: "ID SESIUNE:",
+encrypted: "CONEXIUNE CRIPTATĂ",
+themes: "TEMĂ_OS:",
+lang_matrix: "Matrice Limbi",
+lang_hint: "Derulează lateral. Click pentru limbă UI.",
+toast_lang: "LIMBĂ"
+},
+uk: {
+label_job: "Ціль (Посада)",
+placeholder_job: "напр: Senior Solidity Engineer",
+label_stack: "Тех Стек",
+btn_init: "ІНІЦІАЛІЗУВАТИ",
+sys_logs: "СИСТЕМНІ ЛОГИ",
+stress: "Монітор Стресу",
+progress: "Прогрес Питань",
+feedback: "ЖИВИЙ ФІДБЕК",
+input_placeholder: "Введіть відповідь...",
+ai_processing: "ШІ ОБРОБЛЯЄ...",
+session: "ID СЕСІЇ:",
+encrypted: "ЗАШИФРОВАНЕ ЗʼЄДНАННЯ",
+themes: "ТЕМА_OS:",
+lang_matrix: "Матриця Мов",
+lang_hint: "Гортай боком. Клік — мова UI.",
+toast_lang: "МОВА"
+},
+es: {
+label_job: "Objetivo (Puesto)",
+placeholder_job: "ej: Senior Solidity Engineer",
+label_stack: "Stack Tecnológico",
+btn_init: "INICIALIZAR",
+sys_logs: "REGISTROS DEL SISTEMA",
+stress: "Monitor de Estrés",
+progress: "Progreso de Preguntas",
+feedback: "FEEDBACK EN VIVO",
+input_placeholder: "Escribe tu respuesta...",
+ai_processing: "IA PROCESANDO...",
+session: "ID SESIÓN:",
+encrypted: "CONEXIÓN CIFRADA",
+themes: "TEMA_OS:",
+lang_matrix: "Matriz de Idiomas",
+lang_hint: "Desliza lateral. Click para idioma UI.",
+toast_lang: "IDIOMA"
+},
+fr: {
+label_job: "Cible (Poste)",
+placeholder_job: "ex : Senior Solidity Engineer",
+label_stack: "Stack Technique",
+btn_init: "INITIALISER",
+sys_logs: "JOURNAUX SYSTÈME",
+stress: "Moniteur de Stress",
+progress: "Progression Questions",
+feedback: "RETOUR EN DIRECT",
+input_placeholder: "Tapez votre réponse...",
+ai_processing: "IA EN COURS...",
+session: "ID SESSION :",
+encrypted: "CONNEXION CHIFFRÉE",
+themes: "THÈME_OS :",
+lang_matrix: "Matrice des Langues",
+lang_hint: "Faites défiler. Clic pour langue UI.",
+toast_lang: "LANGUE"
+},
+de: {
+label_job: "Ziel (Jobtitel)",
+placeholder_job: "z.B. Senior Solidity Engineer",
+label_stack: "Tech-Stack",
+btn_init: "INITIALISIEREN",
+sys_logs: "SYSTEM-LOGS",
+stress: "Stressmonitor",
+progress: "Fragenfortschritt",
+feedback: "LIVE-FEEDBACK",
+input_placeholder: "Antwort eingeben...",
+ai_processing: "KI VERARBEITET...",
+session: "SESSION-ID:",
+encrypted: "VERSCHLÜSSELTE VERBINDUNG",
+themes: "THEME_OS:",
+lang_matrix: "Sprachmatrix",
+lang_hint: "Seitlich scrollen. Klick für UI-Sprache.",
+toast_lang: "SPRACHE"
+}
+};
 
-            const LANGS = [
-                { id:"en", flag:"🇺🇸", name:"English", sub:"EN" },
-                { id:"ru", flag:"🇷🇺", name:"Русский", sub:"RU" },
-                { id:"ro", flag:"🇲🇩", name:"Română", sub:"RO" },
-                { id:"uk", flag:"🇺🇦", name:"Українська", sub:"UK" },
-                { id:"es", flag:"🇪🇸", name:"Español", sub:"ES" },
-                { id:"fr", flag:"🇫🇷", name:"Français", sub:"FR" },
-                { id:"de", flag:"🇩🇪", name:"Deutsch", sub:"DE" }
-            ];
+const LANGS = [
+{ id:"en", flag:"🇺🇸", name:"English", sub:"EN" },
+{ id:"ru", flag:"🇷🇺", name:"Русский", sub:"RU" },
+{ id:"ro", flag:"🇲🇩", name:"Română", sub:"RO" },
+{ id:"uk", flag:"🇺🇦", name:"Українська", sub:"UK" },
+{ id:"es", flag:"🇪🇸", name:"Español", sub:"ES" },
+{ id:"fr", flag:"🇫🇷", name:"Français", sub:"FR" },
+{ id:"de", flag:"🇩🇪", name:"Deutsch", sub:"DE" }
+];
 
-            const STORE_KEY = "anterview.lang";
-            window.__lang = localStorage.getItem(STORE_KEY) || (navigator.language || "en").slice(0,2);
-            if(!I18N[window.__lang]) window.__lang = "en";
+const STORE_KEY = "anterview.lang";
+window.__lang = localStorage.getItem(STORE_KEY) || (navigator.language || "en").slice(0,2);
+if(!I18N[window.__lang]) window.__lang = "en";
 
-            function t(key){
-                return (I18N[window.__lang] && I18N[window.__lang][key]) || I18N.en[key] || key;
-            }
-            window.__t = t;
+function t(key){
+return (I18N[window.__lang] && I18N[window.__lang][key]) || I18N.en[key] || key;
+}
+window.__t = t;
 
-            function applyI18n(){
-                const setupStack = document.getElementById("setup-stack");
-                if(setupStack){
-                    const labels = setupStack.querySelectorAll("label");
-                    if(labels[0]) labels[0].textContent = t("label_job");
-                    const jobInput = document.getElementById("job-title");
-                    if(jobInput) jobInput.placeholder = t("placeholder_job");
-                    const stackLabel = document.querySelector("#stack")?.closest("div")?.querySelector("label");
-                    if(stackLabel) stackLabel.textContent = t("label_stack");
-                    const initBtn = document.querySelector("#setup-stack button.sci-btn span");
-                    if(initBtn) initBtn.textContent = t("btn_init");
-                }
+function applyI18n(){
+const setupStack = document.getElementById("setup-stack");
+if(setupStack){
+const labels = setupStack.querySelectorAll("label");
+if(labels[0]) labels[0].textContent = t("label_job");
+const jobInput = document.getElementById("job-title");
+if(jobInput) jobInput.placeholder = t("placeholder_job");
+const stackLabel = document.querySelector("#stack")?.closest("div")?.querySelector("label");
+if(stackLabel) stackLabel.textContent = t("label_stack");
+const initBtn = document.querySelector("#setup-stack button.sci-btn span");
+if(initBtn) initBtn.textContent = t("btn_init");
+}
 
-                const sysHdr = document.querySelector("#setup-view .w-64 .text-cyan-500");
-                if(sysHdr) sysHdr.textContent = t("sys_logs");
+const sysHdr = document.querySelector("#setup-view .w-64 .text-cyan-500");
+if(sysHdr) sysHdr.textContent = t("sys_logs");
 
-                const userInput = document.getElementById("user-input");
-                if(userInput) userInput.placeholder = t("input_placeholder");
+const userInput = document.getElementById("user-input");
+if(userInput) userInput.placeholder = t("input_placeholder");
 
-                const typing = document.getElementById("typing-indicator");
-                if(typing) typing.textContent = t("ai_processing");
+const typing = document.getElementById("typing-indicator");
+if(typing) typing.textContent = t("ai_processing");
 
-                const encrypted = document.querySelector("#chat-view .text-emerald-400");
-                if(encrypted) encrypted.textContent = t("encrypted");
+const encrypted = document.querySelector("#chat-view .text-emerald-400");
+if(encrypted) encrypted.textContent = t("encrypted");
 
-                const session = document.querySelector("#chat-view .text-slate-500");
-                if(session && session.textContent.toUpperCase().includes("SESSION ID")) {
-                    session.innerHTML = `${t("session")} <span class="text-white">#X99-ALPHA</span>`;
-                }
+const session = document.querySelector("#chat-view .text-slate-500");
+if(session && session.textContent.toUpperCase().includes("SESSION ID")) {
+session.innerHTML = `${t("session")} <span class="text-white">#X99-ALPHA</span>`;
+}
 
-                const side = document.querySelector("#chat-view .w-64");
-                if(side){
-                    const labels = side.querySelectorAll(".uppercase.tracking-widest");
-                    labels.forEach(el=>{
-                        const s = el.textContent.trim().toLowerCase();
-                        if(s.includes("stress")) el.textContent = t("stress");
-                        if(s.includes("question")) el.textContent = t("progress");
-                    });
-                    const fb = side.querySelector(".text-red-400.font-bold");
-                    if(fb) fb.textContent = t("feedback");
-                }
+const side = document.querySelector("#chat-view .w-64");
+if(side){
+const labels = side.querySelectorAll(".uppercase.tracking-widest");
+labels.forEach(el=>{
+const s = el.textContent.trim().toLowerCase();
+if(s.includes("stress")) el.textContent = t("stress");
+if(s.includes("question")) el.textContent = t("progress");
+});
+const fb = side.querySelector(".text-red-400.font-bold");
+if(fb) fb.textContent = t("feedback");
+}
 
-                const themeTxt = document.querySelector("#theme-dock .text-slate-500");
-                if(themeTxt) themeTxt.textContent = t("themes");
-            }
+const themeTxt = document.querySelector("#theme-dock .text-slate-500");
+if(themeTxt) themeTxt.textContent = t("themes");
+}
 
-            function setLanguage(lang){
-                if(!I18N[lang]) return;
-                window.__lang = lang;
-                localStorage.setItem(STORE_KEY, lang);
-                applyI18n();
-                try{
-                    if(window.__toast) window.__toast(t("toast_lang"), `${LANGS.find(x=>x.id===lang)?.name || lang} :: UI`, 1800);
-                }catch(e){}
-                try{ playTone(540, "square", 0.06); }catch(e){}
-            }
-            window.setLanguage = setLanguage;
+function setLanguage(lang){
+if(!I18N[lang]) return;
+window.__lang = lang;
+localStorage.setItem(STORE_KEY, lang);
+applyI18n();
+try{
+if(window.__toast) window.__toast(t("toast_lang"), `${LANGS.find(x=>x.id===lang)?.name || lang} :: UI`, 1800);
+}catch(e){}
+try{ playTone(540, "square", 0.06); }catch(e){}
+}
+window.setLanguage = setLanguage;
 
-            function mountLangDock(){
-                const mount = document.getElementById("language-dock-mount");
-                const setup = document.getElementById("setup-stack");
-                if(!setup || !mount) return;
+function mountLangDock(){
+const mount = document.getElementById("language-dock-mount");
+const setup = document.getElementById("setup-stack");
+if(!setup || !mount) return;
 
-                const wrap = document.createElement("div");
-                wrap.id = "language-dock";
-                wrap.className = "glass-panel rounded-lg p-4 border border-white/10";
-                wrap.style.background = "rgba(0,0,0,0.18)";
-                wrap.innerHTML = `
-                    <div class="flex items-center justify-between mb-2">
-                        <div>
-                            <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest" id="lang-title">${t("lang_matrix")}</div>
-                            <div class="text-[9px] mono text-slate-500 opacity-70 mt-1" id="lang-hint">${t("lang_hint")}</div>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <button id="lang-left" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">◀</button>
-                            <button id="lang-right" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">▶</button>
-                        </div>
-                    </div>
-                    <div class="persona-fade">
-                        <div id="lang-strip" class="persona-strip persona-scroll"></div>
-                    </div>
-                `;
-                mount.appendChild(wrap);
+const wrap = document.createElement("div");
+wrap.id = "language-dock";
+wrap.className = "glass-panel rounded-lg p-4 border border-white/10";
+wrap.style.background = "rgba(0,0,0,0.18)";
+wrap.innerHTML = `
+<div class="flex items-center justify-between mb-2">
+<div>
+<div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest" id="lang-title">${t("lang_matrix")}</div>
+<div class="text-[9px] mono text-slate-500 opacity-70 mt-1" id="lang-hint">${t("lang_hint")}</div>
+</div>
+<div class="flex items-center gap-2">
+<button id="lang-left" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">◀</button>
+<button id="lang-right" class="text-[10px] mono text-cyan-500 border border-cyan-500/30 px-2 py-1 hover:bg-cyan-500/10 transition-colors rounded">▶</button>
+</div>
+</div>
+<div class="persona-fade">
+<div id="lang-strip" class="persona-strip persona-scroll"></div>
+</div>
+`;
+mount.appendChild(wrap);
 
-                const strip = wrap.querySelector("#lang-strip");
+const strip = wrap.querySelector("#lang-strip");
 
-                function render(){
-                    strip.innerHTML = "";
-                    LANGS.forEach(L=>{
-                        const card = document.createElement("button");
-                        card.type = "button";
-                        card.className = "lang-card text-left";
-                        if(L.id === window.__lang) card.classList.add("active");
+function render(){
+strip.innerHTML = "";
+LANGS.forEach(L=>{
+const card = document.createElement("button");
+card.type = "button";
+card.className = "lang-card text-left";
+if(L.id === window.__lang) card.classList.add("active");
 
-                        card.innerHTML = `
-                            <div class="flex items-center justify-between gap-3">
-                                <div class="flex items-center gap-3">
-                                    <div class="lang-flag">${L.flag}</div>
-                                    <div>
-                                        <div class="lang-name">${L.name}</div>
-                                        <div class="lang-sub">${L.sub}</div>
-                                    </div>
-                                </div>
-                                <div class="persona-tag mono">${L.id.toUpperCase()}</div>
-                            </div>
-                        `;
+card.innerHTML = `
+<div class="flex items-center justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="lang-flag">${L.flag}</div>
+<div>
+<div class="lang-name">${L.name}</div>
+<div class="lang-sub">${L.sub}</div>
+</div>
+</div>
+<div class="persona-tag mono">${L.id.toUpperCase()}</div>
+</div>
+`;
 
-                        card.addEventListener("click", ()=>{
-                            setLanguage(L.id);
-                            [...strip.querySelectorAll(".lang-card")].forEach(x=>x.classList.remove("active"));
-                            card.classList.add("active");
-                            gsap.fromTo(card, {scale:0.995}, {scale:1.01, duration:0.18, yoyo:true, repeat:1, ease:"power2.out"});
-                            const title = document.getElementById("lang-title");
-                            const hint = document.getElementById("lang-hint");
-                            if(title) title.textContent = t("lang_matrix");
-                            if(hint) hint.textContent = t("lang_hint");
-                        });
+card.addEventListener("click", ()=>{
+setLanguage(L.id);
+[...strip.querySelectorAll(".lang-card")].forEach(x=>x.classList.remove("active"));
+card.classList.add("active");
+gsap.fromTo(card, {scale:0.995}, {scale:1.01, duration:0.18, yoyo:true, repeat:1, ease:"power2.out"});
+const title = document.getElementById("lang-title");
+const hint = document.getElementById("lang-hint");
+if(title) title.textContent = t("lang_matrix");
+if(hint) hint.textContent = t("lang_hint");
+});
 
-                        strip.appendChild(card);
-                    });
+strip.appendChild(card);
+});
 
-                    gsap.fromTo(strip.children, {opacity:0, y:8}, {opacity:1, y:0, duration:0.35, ease:"power2.out", stagger:0.03});
-                }
+gsap.fromTo(strip.children, {opacity:0, y:8}, {opacity:1, y:0, duration:0.35, ease:"power2.out", stagger:0.03});
+}
 
-                render();
+render();
 
-                wrap.querySelector("#lang-left").addEventListener("click", ()=> strip.scrollBy({left:-260, behavior:"smooth"}));
-                wrap.querySelector("#lang-right").addEventListener("click", ()=> strip.scrollBy({left:260, behavior:"smooth"}));
-            }
+wrap.querySelector("#lang-left").addEventListener("click", ()=> strip.scrollBy({left:-260, behavior:"smooth"}));
+wrap.querySelector("#lang-right").addEventListener("click", ()=> strip.scrollBy({left:260, behavior:"smooth"}));
+}
 
-            if(document.readyState === "loading"){
-                document.addEventListener("DOMContentLoaded", ()=> {
-                    mountLangDock();
-                    applyI18n();
-                });
-            } else {
-                mountLangDock();
-                applyI18n();
-            }
-        })();
-    </script>
+if(document.readyState === "loading"){
+document.addEventListener("DOMContentLoaded", ()=> {
+mountLangDock();
+applyI18n();
+});
+} else {
+mountLangDock();
+applyI18n();
+}
+})();
+</script>
 
-    <!-- ============================
-         ANTERVIEW: ADD-ONLY POWER PATCH
-         (Implements all requested upgrades WITHOUT deleting your existing code)
-    ============================= -->
-    <script>
-    (function(){
-      const $ = (q, root=document)=>root.querySelector(q);
-      const $$ = (q, root=document)=>Array.from(root.querySelectorAll(q));
-      const now = ()=>Date.now();
+<!-- ============================
+ANTERVIEW: ADD-ONLY POWER PATCH
+(Implements all requested upgrades WITHOUT deleting your existing code)
+============================= -->
+<script>
+(function(){
+const $ = (q, root=document)=>root.querySelector(q);
+const $$ = (q, root=document)=>Array.from(root.querySelectorAll(q));
+const now = ()=>Date.now();
 
-      const clamp = (n,a,b)=>Math.max(a, Math.min(b,n));
-      const safeText = (s)=>String(s ?? "").replace(/\u0000/g,"");
-      const escapeHTML = (s)=>safeText(s)
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
+const clamp = (n,a,b)=>Math.max(a, Math.min(b,n));
+const safeText = (s)=>String(s ?? "").replace(/\u0000/g,"");
+const escapeHTML = (s)=>safeText(s)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
 
-      const PATCH = window.__ANTERVIEW_PATCH__ = window.__ANTERVIEW_PATCH__ || {
-        version: "EH-PRO-PATCH-ULTIMATE",
-        sessionId: "X99-ALPHA",
-        startedAt: null,
-        lastKeyAt: 0,
-        lastSendAt: 0,
-        keyCount: 0,
-        backspaces: 0,
-        pasteCount: 0,
-        focusLost: 0,
-        msgMeta: [],
-        aiMeta: [],
-        reactions: {},
-        theoryChecklist: { tradeoffs:0, failure:0, metrics:0, complexity:0, security:0, examples:0, numbers:0 },
-        theoryScore: 0,
-        consoleOpened: false,
-        coding: { tasks: [], currentTask: 0, solved: 0, attempts: 0, lastResult: null },
-        autoScrollLock: false,
-        interviewLang: "en",
-        persona: "herman",
-        theme: "cyan",
-        mode: "free",
-        saved: false
-      };
+const PATCH = window.__ANTERVIEW_PATCH__ = window.__ANTERVIEW_PATCH__ || {
+version: "EH-PRO-PATCH-ULTIMATE",
+sessionId: "X99-ALPHA",
+startedAt: null,
+lastKeyAt: 0,
+lastSendAt: 0,
+keyCount: 0,
+backspaces: 0,
+pasteCount: 0,
+focusLost: 0,
+msgMeta: [],
+aiMeta: [],
+reactions: {},
+theoryChecklist: { tradeoffs:0, failure:0, metrics:0, complexity:0, security:0, examples:0, numbers:0 },
+theoryScore: 0,
+consoleOpened: false,
+coding: { tasks: [], currentTask: 0, solved: 0, attempts: 0, lastResult: null },
+autoScrollLock: false,
+interviewLang: "en",
+persona: "herman",
+theme: "cyan",
+mode: "free",
+saved: false
+};
 
-      function syncInterviewLanguage(){
-        const lang = (window.__lang && typeof window.__lang === "string") ? window.__lang : "en";
-        PATCH.interviewLang = (["en","ru","ro","uk","es","fr","de"].includes(lang) ? lang : "en");
-      }
-      syncInterviewLanguage();
+function syncInterviewLanguage(){
+const lang = (window.__lang && typeof window.__lang === "string") ? window.__lang : "en";
+PATCH.interviewLang = (["en","ru","ro","uk","es","fr","de"].includes(lang) ? lang : "en");
+}
+syncInterviewLanguage();
 
-      if(typeof window.setLanguage === "function" && !window.__langPatched2){
-        const _setLanguage = window.setLanguage;
-        window.setLanguage = function(lang){
-          const r = _setLanguage(lang);
-          syncInterviewLanguage();
-          try{ window.__toast && window.__toast("INTERVIEW_LANG", `${PATCH.interviewLang.toUpperCase()} :: AI replies`, 1600); }catch(e){}
-          return r;
-        };
-        window.__langPatched2 = true;
-      }
+if(typeof window.setLanguage === "function" && !window.__langPatched2){
+const _setLanguage = window.setLanguage;
+window.setLanguage = function(lang){
+const r = _setLanguage(lang);
+syncInterviewLanguage();
+try{ window.__toast && window.__toast("INTERVIEW_LANG", `${PATCH.interviewLang.toUpperCase()} :: AI replies`, 1600); }catch(e){}
+return r;
+};
+window.__langPatched2 = true;
+}
 
-      if(typeof window.buildPrompt === "function" && !window.__buildPromptPatched2){
-        const _buildPrompt = window.buildPrompt;
-        window.buildPrompt = function(job, stack){
-          const base = _buildPrompt(job, stack);
-          const lang = PATCH.interviewLang || "en";
-          const langRule = `
+if(typeof window.buildPrompt === "function" && !window.__buildPromptPatched2){
+const _buildPrompt = window.buildPrompt;
+window.buildPrompt = function(job, stack){
+const base = _buildPrompt(job, stack);
+const lang = PATCH.interviewLang || "en";
+const langRule = `
 LANGUAGE:
 - Reply ONLY in ${lang.toUpperCase()}.
 - Keep the same intensity/persona, but language must match.
@@ -1439,1022 +1441,816 @@ Always:
 - Ask ONE question at a time.
 - Keep replies compact.
 - End the last message with [END].`;
-          return base + "\n" + langRule;
-        };
-        window.__buildPromptPatched2 = true;
-      }
+return base + "\n" + langRule;
+};
+window.__buildPromptPatched2 = true;
+}
 
-      // ----------------------------
-      // Real stress + theory signals
-      // ----------------------------
-      function analyzeCandidateText(txt){
-        const t = safeText(txt).toLowerCase();
-        const words = t.split(/\s+/).filter(Boolean);
-        const len = txt.length;
+// ----------------------------
+// Real stress + theory signals
+// ----------------------------
+function analyzeCandidateText(txt){
+const t = safeText(txt).toLowerCase();
+const words = t.split(/\s+/).filter(Boolean);
+const len = txt.length;
 
-        const hasBullets = /(\n\s*[-*•])|(\n\s*\d+\.)/.test(txt);
-        const hasNumbers = /\b\d+(\.\d+)?\b/.test(txt);
-        const hasMetrics = /\b(latency|p99|p95|throughput|qps|rps|slo|sla|error rate|availability|cpu|memory|ram|cost)\b/.test(t);
-        const hasTradeoffs = /\b(trade[- ]?off|pros|cons|however|but|on the other hand|vs)\b/.test(t);
-        const hasFailure = /\b(failure|failover|retry|timeouts?|circuit breaker|backpressure|outage|degrad|fallback)\b/.test(t);
-        const hasSecurity = /\b(auth|oauth|jwt|iam|kms|encryption|rate limit|waf|csrf|xss|secrets?)\b/.test(t);
-        const hasComplexity = /\b(o\(|big[- ]?o|time complexity|space complexity)\b/.test(t);
-        const hasExamples = /\b(for example|e\.g\.|например|de exemplu|napr|напр|наприклад)\b/.test(t);
-        const isIdk = /\b(i don'?t know|idk|no idea|не знаю|nu știu)\b/.test(t);
+const hasBullets = /(\n\s*[-*•])|(\n\s*\d+\.)/.test(txt);
+const hasNumbers = /\b\d+(\.\d+)?\b/.test(txt);
+const hasMetrics = /\b(latency|p99|p95|throughput|qps|rps|slo|sla|error rate|availability|cpu|memory|ram|cost)\b/.test(t);
+const hasTradeoffs = /\b(trade[- ]?off|pros|cons|however|but|on the other hand|vs)\b/.test(t);
+const hasFailure = /\b(failure|failover|retry|timeouts?|circuit breaker|backpressure|outage|degrad|fallback)\b/.test(t);
+const hasSecurity = /\b(auth|oauth|jwt|iam|kms|encryption|rate limit|waf|csrf|xss|secrets?)\b/.test(t);
+const hasComplexity = /\b(o\(|big[- ]?o|time complexity|space complexity)\b/.test(t);
+const hasExamples = /\b(for example|e\.g\.|например|de exemplu|napr|напр|наприклад)\b/.test(t);
+const isIdk = /\b(i don'?t know|idk|no idea|не знаю|nu știu)\b/.test(t);
 
-        return {
-          words: words.length,
-          len,
-          hasBullets,
-          hasNumbers,
-          hasMetrics,
-          hasTradeoffs,
-          hasFailure,
-          hasSecurity,
-          hasComplexity,
-          hasExamples,
-          isIdk
-        };
-      }
+return {
+words: words.length,
+len,
+hasBullets,
+hasNumbers,
+hasMetrics,
+hasTradeoffs,
+hasFailure,
+hasSecurity,
+hasComplexity,
+hasExamples,
+isIdk
+};
+}
 
-      function updateTheoryChecklist(sig){
-        PATCH.theoryChecklist.tradeoffs += sig.hasTradeoffs ? 1 : 0;
-        PATCH.theoryChecklist.failure += sig.hasFailure ? 1 : 0;
-        PATCH.theoryChecklist.metrics += (sig.hasMetrics || sig.hasNumbers) ? 1 : 0;
-        PATCH.theoryChecklist.security += sig.hasSecurity ? 1 : 0;
-        PATCH.theoryChecklist.complexity += sig.hasComplexity ? 1 : 0;
-        PATCH.theoryChecklist.examples += sig.hasExamples ? 1 : 0;
-        PATCH.theoryChecklist.numbers += sig.hasNumbers ? 1 : 0;
+function updateTheoryChecklist(sig){
+PATCH.theoryChecklist.tradeoffs += sig.hasTradeoffs ? 1 : 0;
+PATCH.theoryChecklist.failure += sig.hasFailure ? 1 : 0;
+PATCH.theoryChecklist.metrics += (sig.hasMetrics || sig.hasNumbers) ? 1 : 0;
+PATCH.theoryChecklist.security += sig.hasSecurity ? 1 : 0;
+PATCH.theoryChecklist.complexity += sig.hasComplexity ? 1 : 0;
+PATCH.theoryChecklist.examples += sig.hasExamples ? 1 : 0;
+PATCH.theoryChecklist.numbers += sig.hasNumbers ? 1 : 0;
 
-        const c = PATCH.theoryChecklist;
-        const score =
-          (c.tradeoffs>0) + (c.failure>0) + (c.metrics>0) + (c.security>0) + (c.examples>0) + (c.complexity>0) + (c.numbers>0);
-        PATCH.theoryScore = score; // 0..7
-      }
+const c = PATCH.theoryChecklist;
+const score =
+(c.tradeoffs>0) + (c.failure>0) + (c.metrics>0) + (c.security>0) + (c.examples>0) + (c.complexity>0) + (c.numbers>0);
+PATCH.theoryScore = score; // 0..7
+}
 
-      function computeStressDelta(meta, sig){
-        let d = 0;
-        const kpm = meta.kpm || 0;
-        const backRate = meta.backRate || 0;
+function computeStressDelta(meta, sig){
+let d = 0;
+const kpm = meta.kpm || 0;
+const backRate = meta.backRate || 0;
 
-        if(kpm < 80 && sig.words < 18) d += 8;
-        if(sig.words < 10) d += 10;
-        if(sig.isIdk) d += 14;
+if(kpm < 80 && sig.words < 18) d += 8;
+if(sig.words < 10) d += 10;
+if(sig.isIdk) d += 14;
 
-        if(backRate > 0.20) d += 8;
-        else if(backRate > 0.12) d += 4;
+if(backRate > 0.20) d += 8;
+else if(backRate > 0.12) d += 4;
 
-        if(sig.hasBullets) d -= 6;
-        if(sig.hasNumbers) d -= 4;
-        if(sig.hasMetrics) d -= 5;
-        if(sig.hasTradeoffs) d -= 4;
-        if(sig.hasFailure) d -= 4;
-        if(sig.hasSecurity) d -= 3;
-        if(sig.hasExamples) d -= 3;
+if(sig.hasBullets) d -= 6;
+if(sig.hasNumbers) d -= 4;
+if(sig.hasMetrics) d -= 5;
+if(sig.hasTradeoffs) d -= 4;
+if(sig.hasFailure) d -= 4;
+if(sig.hasSecurity) d -= 3;
+if(sig.hasExamples) d -= 3;
 
-        if(sig.len > 260 && !sig.hasBullets) d += 6;
+if(sig.len > 260 && !sig.hasBullets) d += 6;
 
-        return clamp(d, -12, 18);
-      }
+return clamp(d, -12, 18);
+}
 
-      function theoryComplete(){
-        // 5/7 signals is “strong enough”
-        return PATCH.theoryScore >= 5;
-      }
+function theoryComplete(){
+// 5/7 signals is “strong enough”
+return PATCH.theoryScore >= 5;
+}
 
-      // ----------------------------
-      // Auto-scroll lock (if user scrolls up)
-      // ----------------------------
-      function initAutoScrollLock(){
-        const sc = document.getElementById("chat-scroll");
-        if(!sc || sc.__autoScrollPatched) return;
-        sc.__autoScrollPatched = true;
+// ----------------------------
+// Auto-scroll lock (if user scrolls up)
+// ----------------------------
+function initAutoScrollLock(){
+const sc = document.getElementById("chat-scroll");
+if(!sc || sc.__autoScrollPatched) return;
+sc.__autoScrollPatched = true;
 
-        function nearBottom(){
-          return (sc.scrollHeight - sc.scrollTop - sc.clientHeight) < 80;
-        }
+function nearBottom(){
+return (sc.scrollHeight - sc.scrollTop - sc.clientHeight) < 80;
+}
 
-        sc.addEventListener("scroll", ()=>{
-          PATCH.autoScrollLock = !nearBottom();
-        }, {passive:true});
-      }
+sc.addEventListener("scroll", ()=>{
+PATCH.autoScrollLock = !nearBottom();
+}, {passive:true});
+}
 
-      function autoScrollMaybe(){
-        const sc = document.getElementById("chat-scroll");
-        if(!sc) return;
-        if(!PATCH.autoScrollLock){
-          sc.scrollTop = sc.scrollHeight;
-        }
-      }
+function autoScrollMaybe(){
+const sc = document.getElementById("chat-scroll");
+if(!sc) return;
+if(!PATCH.autoScrollLock){
+sc.scrollTop = sc.scrollHeight;
+}
+}
 
-      // ----------------------------
-      // Input telemetry (typing speed, backspaces, paste)
-      // ----------------------------
-      function initTelemetry(){
-        const input = document.getElementById("user-input");
-        if(!input || input.__telemetryPatched) return;
-        input.__telemetryPatched = true;
+// ----------------------------
+// Input telemetry (typing speed, backspaces, paste)
+// ----------------------------
+function initTelemetry(){
+const input = document.getElementById("user-input");
+if(!input || input.__telemetryPatched) return;
+input.__telemetryPatched = true;
 
-        PATCH.startedAt = PATCH.startedAt || now();
+PATCH.startedAt = PATCH.startedAt || now();
 
-        let windowStart = now();
-        let windowKeys = 0;
-        let windowBack = 0;
+let windowStart = now();
+let windowKeys = 0;
+let windowBack = 0;
 
-        input.addEventListener("keydown", (e)=>{
-          PATCH.lastKeyAt = now();
-          PATCH.keyCount++;
-          windowKeys++;
-          if(e.key === "Backspace"){
-            PATCH.backspaces++;
-            windowBack++;
-          }
-        });
+input.addEventListener("keydown", (e)=>{
+PATCH.lastKeyAt = now();
+PATCH.keyCount++;
+windowKeys++;
+if(e.key === "Backspace"){
+PATCH.backspaces++;
+windowBack++;
+}
+});
 
-        input.addEventListener("paste", ()=>{
-          PATCH.pasteCount++;
-        });
+input.addEventListener("paste", ()=>{
+PATCH.pasteCount++;
+});
 
-        document.addEventListener("visibilitychange", ()=>{
-          if(document.hidden) PATCH.focusLost++;
-        });
+document.addEventListener("visibilitychange", ()=>{
+if(document.hidden) PATCH.focusLost++;
+});
 
-        input.__getKpmMeta = ()=>{
-          const dt = Math.max(1, (now() - windowStart) / 60000);
-          const kpm = windowKeys / dt;
-          const backRate = windowKeys ? (windowBack / windowKeys) : 0;
-          // reset for next message
-          windowStart = now();
-          windowKeys = 0;
-          windowBack = 0;
-          return { kpm, backRate };
-        };
-      }
+input.__getKpmMeta = ()=>{
+const dt = Math.max(1, (now() - windowStart) / 60000);
+const kpm = windowKeys / dt;
+const backRate = windowKeys ? (windowBack / windowKeys) : 0;
+// reset for next message
+windowStart = now();
+windowKeys = 0;
+windowBack = 0;
+return { kpm, backRate };
+};
+}
 
-      // ----------------------------
-      // Safer rendering (avoid HTML injection)
-      // ----------------------------
-      function safeRenderBubbles(){
-        if(typeof window.addBubble !== "function" || window.addBubble.__safePatched) return;
-        const _addBubble = window.addBubble;
+// ----------------------------
+// Safer rendering (avoid HTML injection)
+// ----------------------------
+function safeRenderBubbles(){
+if(typeof window.addBubble !== "function" || window.addBubble.__safePatched) return;
+const _addBubble = window.addBubble;
 
-        window.addBubble = function(role, text, isUser){
-          const sc = document.getElementById("chat-scroll");
-          const beforeCount = sc ? sc.children.length : 0;
+window.addBubble = function(role, text, isUser){
+const sc = document.getElementById("chat-scroll");
+const beforeCount = sc ? sc.children.length : 0;
 
-          // call original (keeps your design), but then sanitize the content in-place
-          const r = _addBubble(role, text, isUser);
+// call original (keeps your design), but then sanitize the content in-place
+const r = _addBubble(role, text, isUser);
 
-          try{
-            const after = sc && sc.children[beforeCount] ? sc.children[beforeCount] : (sc ? sc.lastElementChild : null);
-            if(after){
-              const msgBody = after.querySelector(".text-sm.leading-relaxed");
-              if(msgBody) msgBody.innerHTML = escapeHTML(text).replace(/\n/g,"<br>");
-              after.dataset.msgId = after.dataset.msgId || ("m_" + now() + "_" + Math.random().toString(16).slice(2));
-              after.dataset.role = isUser ? "candidate" : "assistant";
-              attachReactions(after);
-            }
-          }catch(e){}
+try{
+const after = sc && sc.children[beforeCount] ? sc.children[beforeCount] : (sc ? sc.lastElementChild : null);
+if(after){
+const msgBody = after.querySelector(".text-sm.leading-relaxed");
+if(msgBody) msgBody.innerHTML = escapeHTML(text).replace(/\n/g,"<br>");
+after.dataset.msgId = after.dataset.msgId || ("m_" + now() + "_" + Math.random().toString(16).slice(2));
+after.dataset.role = isUser ? "candidate" : "assistant";
+attachReactions(after);
+}
+}catch(e){}
 
-          autoScrollMaybe();
-          return r;
-        };
-        window.addBubble.__safePatched = true;
-      }
+autoScrollMaybe();
+return r;
+};
+window.addBubble.__safePatched = true;
+}
 
-      function safeRenderTypewriter(){
-        if(typeof window.typewriter !== "function" || window.typewriter.__safePatched) return;
-        const _typewriter = window.typewriter;
+function safeRenderTypewriter(){
+if(typeof window.typewriter !== "function" || window.typewriter.__safePatched) return;
+const _typewriter = window.typewriter;
 
-        window.typewriter = function(text){
-          const sc = document.getElementById("chat-scroll");
-          const beforeCount = sc ? sc.children.length : 0;
-          const r = _typewriter(text);
+window.typewriter = function(text){
+const sc = document.getElementById("chat-scroll");
+const beforeCount = sc ? sc.children.length : 0;
+const r = _typewriter(text);
 
-          // After the element exists, ensure it types into textContent only (your code already does),
-          // but we also attach msg id + reactions.
-          try{
-            setTimeout(()=>{
-              const msg = sc && sc.children[beforeCount] ? sc.children[beforeCount] : (sc ? sc.lastElementChild : null);
-              if(msg){
-                msg.dataset.msgId = msg.dataset.msgId || ("a_" + now() + "_" + Math.random().toString(16).slice(2));
-                msg.dataset.role = "assistant";
-                attachReactions(msg);
-              }
-            }, 30);
-          }catch(e){}
-          return r;
-        };
-        window.typewriter.__safePatched = true;
-      }
+// After the element exists, ensure it types into textContent only (your code already does),
+// but we also attach msg id + reactions.
+try{
+setTimeout(()=>{
+const msg = sc && sc.children[beforeCount] ? sc.children[beforeCount] : (sc ? sc.lastElementChild : null);
+if(msg){
+msg.dataset.msgId = msg.dataset.msgId || ("a_" + now() + "_" + Math.random().toString(16).slice(2));
+msg.dataset.role = "assistant";
+attachReactions(msg);
+}
+}, 30);
+}catch(e){}
+return r;
+};
+window.typewriter.__safePatched = true;
+}
 
-      // ----------------------------
-      // Reactions (👍 👎) for messages
-      // ----------------------------
-      function attachReactions(container){
-        if(!container || container.__reactPatched) return;
-        container.__reactPatched = true;
+// ----------------------------
+// Reactions (👍 👎) for messages
+// ----------------------------
+function attachReactions(container){
+if(!container || container.__reactPatched) return;
+container.__reactPatched = true;
 
-        const bubble = container.querySelector("div.max-w-\\[80\\%\\]") || container.firstElementChild;
-        if(!bubble) return;
+const bubble = container.querySelector("div.max-w-\\[80\\%\\]") || container.firstElementChild;
+if(!bubble) return;
 
-        const id = container.dataset.msgId || ("x_" + now());
-        container.dataset.msgId = id;
+const id = container.dataset.msgId || ("x_" + now());
+container.dataset.msgId = id;
 
-        const bar = document.createElement("div");
-        bar.className = "mt-3 flex items-center gap-2 opacity-70";
-        bar.innerHTML = `
-          <button data-r="up" class="mono text-[10px] border border-white/10 hover:bg-white/5 px-2 py-1 rounded">👍</button>
-          <button data-r="down" class="mono text-[10px] border border-white/10 hover:bg-white/5 px-2 py-1 rounded">👎</button>
-          <span class="mono text-[9px] text-slate-500 ml-2" data-rstat> </span>
-        `;
-        bubble.appendChild(bar);
+const bar = document.createElement("div");
+bar.className = "mt-3 flex items-center gap-2 opacity-70";
+bar.innerHTML = `
+<button data-r="up" class="mono text-[10px] border border-white/10 hover:bg-white/5 px-2 py-1 rounded">👍</button>
+<button data-r="down" class="mono text-[10px] border border-white/10 hover:bg-white/5 px-2 py-1 rounded">👎</button>
+<span class="mono text-[9px] text-slate-500 ml-2" data-rstat> </span>
+`;
+bubble.appendChild(bar);
 
-        function render(){
-          const r = PATCH.reactions[id] || {up:0, down:0};
-          const stat = bar.querySelector("[data-rstat]");
-          if(stat) stat.textContent = r.up || r.down ? `(${r.up} / ${r.down})` : "";
-        }
-        render();
+function render(){
+const r = PATCH.reactions[id] || {up:0, down:0};
+const stat = bar.querySelector("[data-rstat]");
+if(stat) stat.textContent = r.up || r.down ? `(${r.up} / ${r.down})` : "";
+}
+render();
 
-        bar.addEventListener("click", (e)=>{
-          const btn = e.target.closest("button[data-r]");
-          if(!btn) return;
-          PATCH.reactions[id] = PATCH.reactions[id] || {up:0, down:0};
-          if(btn.dataset.r === "up") PATCH.reactions[id].up++;
-          else PATCH.reactions[id].down++;
-          try{ playTone(720, "square", 0.05); }catch(e){}
-          render();
-        });
-      }
+bar.addEventListener("click", (e)=>{
+const btn = e.target.closest("button[data-r]");
+if(!btn) return;
+PATCH.reactions[id] = PATCH.reactions[id] || {up:0, down:0};
+if(btn.dataset.r === "up") PATCH.reactions[id].up++;
+else PATCH.reactions[id].down++;
+try{ playTone(720, "square", 0.05); }catch(e){}
+render();
+});
+}
 
-      // ----------------------------
-      // Coding console (slide-out)
-      // ----------------------------
-      function ensureCodingUI(){
-        if(document.getElementById("coding-console")) return;
+// ----------------------------
+// Coding console (slide-out)
+// ----------------------------
+function ensureCodingUI(){
+if(document.getElementById("coding-console")) return;
 
-        const root = document.body;
-        const panel = document.createElement("div");
-        panel.id = "coding-console";
-        panel.style.cssText = `
-          position:fixed; top:0; right:0; height:100%; width:min(520px, 92vw);
-          background:rgba(0,0,0,0.82); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
-          border-left:1px solid rgba(255,255,255,0.12);
-          z-index:9998; transform:translateX(105%); pointer-events:none;
-          box-shadow: 0 0 60px rgba(0,245,255,0.08);
-          display:flex; flex-direction:column;
-        `;
-        panel.innerHTML = `
-          <div style="padding:16px 16px 12px 16px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; gap:12px;">
-            <div>
-              <div class="mono" style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--neon-cyan); opacity:0.9;">>> CODING_CONSOLE</div>
-              <div class="mono" style="font-size:9px; opacity:0.65; margin-top:4px;">Solve tasks. Press RUN TESTS. Passing boosts final score.</div>
-            </div>
-            <button id="coding-close" class="mono text-[10px] border border-white/10 hover:bg-white/5 px-3 py-2 rounded">[CLOSE]</button>
-          </div>
+const root = document.body;
+const panel = document.createElement("div");
+panel.id = "coding-console";
+panel.style.cssText = `
+position:fixed; top:0; right:0; height:100%; width:min(520px, 92vw);
+background:rgba(0,0,0,0.82); backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+border-left:1px solid rgba(255,255,255,0.12);
+z-index:9998; transform:translateX(105%); pointer-events:none;
+box-shadow: 0 0 60px rgba(0,245,255,0.08);
+display:flex; flex-direction:column;
+`;
+panel.innerHTML = `
+<div style="padding:16px 16px 12px 16px; border-bottom:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; justify-content:space-between; gap:12px;">
+<div>
+<div class="mono" style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--neon-cyan); opacity:0.9;">>> CODING_CONSOLE</div>
+<div class="mono" style="font-size:9px; opacity:0.65; margin-top:4px;">Solve tasks. Press RUN TESTS. Passing boosts final score.</div>
+</div>
+<button id="coding-close" class="mono text-[10px] border border-white/10 hover:bg-white/5 px-3 py-2 rounded">[CLOSE]</button>
+</div>
 
-          <div id="coding-task" style="padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
+<div id="coding-task" style="padding:14px 16px; border-bottom:1px solid rgba(255,255,255,0.08);"></div>
 
-          <div style="flex:1; padding:14px 16px; display:flex; flex-direction:column; gap:10px;">
-            <textarea id="coding-editor" class="mono" style="
-              flex:1; width:100%; resize:none;
-              background:rgba(255,255,255,0.04);
-              border:1px solid rgba(255,255,255,0.10);
-              border-radius:12px;
-              padding:12px;
-              outline:none;
-              color:#fff;
-              font-size:12px;
-              line-height:1.4;
-            " spellcheck="false"></textarea>
+<div style="flex:1; padding:14px 16px; display:flex; flex-direction:column; gap:10px;">
+<textarea id="coding-editor" class="mono" style="
+flex:1; width:100%; resize:none;
+background:rgba(255,255,255,0.04);
+border:1px solid rgba(255,255,255,0.10);
+border-radius:12px;
+padding:12px;
+outline:none;
+color:#fff;
+font-size:12px;
+line-height:1.4;
+" spellcheck="false"></textarea>
 
-            <div style="display:flex; gap:10px;">
-              <button id="coding-run" class="mono" style="
-                flex:1;
-                padding:12px;
-                border-radius:12px;
-                border:1px solid rgba(0,245,255,0.35);
-                background:rgba(0,245,255,0.08);
-              ">[RUN TESTS]</button>
-              <button id="coding-next" class="mono" style="
-                width:140px;
-                padding:12px;
-                border-radius:12px;
-                border:1px solid rgba(255,255,255,0.12);
-                background:rgba(255,255,255,0.04);
-              ">[NEXT]</button>
-            </div>
+<div style="display:flex; gap:10px;">
+<button id="coding-run" class="mono" style="
+flex:1;
+padding:12px;
+border-radius:12px;
+border:1px solid rgba(0,245,255,0.35);
+background:rgba(0,245,255,0.08);
+">[RUN TESTS]</button>
+<button id="coding-next" class="mono" style="
+width:140px;
+padding:12px;
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.12);
+background:rgba(255,255,255,0.04);
+">[NEXT]</button>
+</div>
 
-            <div id="coding-output" class="mono" style="
-              background:rgba(0,0,0,0.5);
-              border:1px solid rgba(255,255,255,0.10);
-              border-radius:12px;
-              padding:10px;
-              font-size:10px;
-              color:#cbd5e1;
-              min-height:60px;
-              white-space:pre-wrap;
-              overflow:auto;
-              max-height:160px;
-            "></div>
-          </div>
-        `;
-        root.appendChild(panel);
+<div id="coding-output" class="mono" style="
+background:rgba(0,0,0,0.5);
+border:1px solid rgba(255,255,255,0.10);
+border-radius:12px;
+padding:10px;
+font-size:10px;
+color:#cbd5e1;
+min-height:60px;
+white-space:pre-wrap;
+overflow:auto;
+max-height:160px;
+"></div>
+</div>
+`;
+root.appendChild(panel);
 
-        PATCH.coding.tasks = PATCH.coding.tasks.length ? PATCH.coding.tasks : defaultTasks();
+PATCH.coding.tasks = PATCH.coding.tasks.length ? PATCH.coding.tasks : defaultTasks();
 
-        $("#coding-close").addEventListener("click", closeCodingConsole);
-        $("#coding-next").addEventListener("click", ()=>{
-          PATCH.coding.currentTask = (PATCH.coding.currentTask + 1) % PATCH.coding.tasks.length;
-          renderTask();
-          try{ playTone(640, "sine", 0.06); }catch(e){}
-        });
-        $("#coding-run").addEventListener("click", runTests);
+$("#coding-close").addEventListener("click", closeCodingConsole);
+$("#coding-next").addEventListener("click", ()=>{
+PATCH.coding.currentTask = (PATCH.coding.currentTask + 1) % PATCH.coding.tasks.length;
+renderTask();
+try{ playTone(640, "sine", 0.06); }catch(e){}
+});
+$("#coding-run").addEventListener("click", runTests);
 
-        renderTask();
-      }
+renderTask();
+}
 
-      function defaultTasks(){
-        return [
-          {
-            id:"t1",
-            title:"Warm-up: Reverse String",
-            prompt:`Implement a function <b>reverseString(s)</b> that returns the reversed string.`,
-            template:
+function defaultTasks(){
+return [
+{
+id:"t1",
+title:"Warm-up: Reverse String",
+prompt:`Implement a function <b>reverseString(s)</b> that returns the reversed string.`,
+template:
 `function reverseString(s){
-  // TODO
+// TODO
 }
 
 module.exports = { reverseString };`,
-            tests:(api)=>{
-              const { reverseString } = api;
-              if(typeof reverseString !== "function") throw new Error("reverseString is not a function");
-              if(reverseString("abc") !== "cba") throw new Error("Expected cba");
-              if(reverseString("") !== "") throw new Error("Expected empty string");
-              if(reverseString("a") !== "a") throw new Error("Expected a");
-              return true;
-            }
-          },
-          {
-            id:"t2",
-            title:"Hashmap: First Non-Repeating Char Index",
-            prompt:`Implement <b>firstUniqueIndex(s)</b> that returns the index of the first non-repeating char, or -1.`,
-            template:
+tests:(api)=>{
+const { reverseString } = api;
+if(typeof reverseString !== "function") throw new Error("reverseString is not a function");
+if(reverseString("abc") !== "cba") throw new Error("Expected cba");
+if(reverseString("") !== "") throw new Error("Expected empty string");
+if(reverseString("a") !== "a") throw new Error("Expected a");
+return true;
+}
+},
+{
+id:"t2",
+title:"Hashmap: First Non-Repeating Char Index",
+prompt:`Implement <b>firstUniqueIndex(s)</b> that returns the index of the first non-repeating char, or -1.`,
+template:
 `function firstUniqueIndex(s){
-  // TODO
+// TODO
 }
 
 module.exports = { firstUniqueIndex };`,
-            tests:(api)=>{
-              const { firstUniqueIndex } = api;
-              if(typeof firstUniqueIndex !== "function") throw new Error("firstUniqueIndex is not a function");
-              if(firstUniqueIndex("leetcode") !== 0) throw new Error("leetcode -> 0");
-              if(firstUniqueIndex("aabb") !== -1) throw new Error("aabb -> -1");
-              if(firstUniqueIndex("loveleetcode") !== 2) throw new Error("loveleetcode -> 2");
-              return true;
-            }
-          },
-          {
-            id:"t3",
-            title:"Concurrency Thinking: Rate Limiter (token bucket)",
-            prompt:`Implement <b>allow()</b> in a TokenBucket class. Constructor: (capacity, refillPerSec). allow() returns true/false.`,
-            template:
+tests:(api)=>{
+const { firstUniqueIndex } = api;
+if(typeof firstUniqueIndex !== "function") throw new Error("firstUniqueIndex is not a function");
+if(firstUniqueIndex("leetcode") !== 0) throw new Error("leetcode -> 0");
+if(firstUniqueIndex("aabb") !== -1) throw new Error("aabb -> -1");
+if(firstUniqueIndex("loveleetcode") !== 2) throw new Error("loveleetcode -> 2");
+return true;
+}
+},
+{
+id:"t3",
+title:"Concurrency Thinking: Rate Limiter (token bucket)",
+prompt:`Implement <b>allow()</b> in a TokenBucket class. Constructor: (capacity, refillPerSec). allow() returns true/false.`,
+template:
 `class TokenBucket{
-  constructor(capacity, refillPerSec){
-    this.capacity = capacity;
-    this.refillPerSec = refillPerSec;
-    this.tokens = capacity;
-    this.last = Date.now();
-  }
-  allow(){
-    // TODO
-  }
+constructor(capacity, refillPerSec){
+this.capacity = capacity;
+this.refillPerSec = refillPerSec;
+this.tokens = capacity;
+this.last = Date.now();
+}
+allow(){
+// TODO
+}
 }
 
 module.exports = { TokenBucket };`,
-            tests:(api)=>{
-              const { TokenBucket } = api;
-              if(typeof TokenBucket !== "function") throw new Error("TokenBucket missing");
-              const b = new TokenBucket(2, 1000); // super fast refill
-              if(!b.allow()) throw new Error("first should allow");
-              if(!b.allow()) throw new Error("second should allow");
-              // third may allow due to refill; force no refill by setting last to now
-              b.last = Date.now();
-              b.tokens = 0;
-              if(b.allow() !== false) throw new Error("should block when empty and no time passed");
-              return true;
-            }
-          }
-        ];
-      }
-
-      function openCodingConsole(){
-        ensureCodingUI();
-        const panel = document.getElementById("coding-console");
-        if(!panel) return;
-        PATCH.consoleOpened = true;
-        panel.style.pointerEvents = "auto";
-        gsap.to(panel, {x:0, duration:0.5, ease:"power3.out"});
-        window.__toast && window.__toast("CODING", "Console opened. Pass tests to boost score.", 2000);
-      }
-
-      function closeCodingConsole(){
-        const panel = document.getElementById("coding-console");
-        if(!panel) return;
-        gsap.to(panel, {x:"105%", duration:0.42, ease:"power3.in", onComplete:()=>{
-          panel.style.pointerEvents = "none";
-        }});
-      }
-
-      function renderTask(){
-        const task = PATCH.coding.tasks[PATCH.coding.currentTask];
-        const taskBox = document.getElementById("coding-task");
-        const ed = document.getElementById("coding-editor");
-        const out = document.getElementById("coding-output");
-        if(!taskBox || !ed || !out) return;
-
-        taskBox.innerHTML = `
-          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
-            <div>
-              <div class="mono" style="font-size:12px; font-weight:800; letter-spacing:-0.01em;">${escapeHTML(task.title)}</div>
-              <div class="mono" style="font-size:10px; opacity:0.75; margin-top:6px;">${task.prompt}</div>
-            </div>
-            <div class="mono" style="font-size:10px; opacity:0.7;">TASK ${PATCH.coding.currentTask+1}/${PATCH.coding.tasks.length}</div>
-          </div>
-        `;
-        ed.value = task.template;
-        out.textContent = "Ready. Implement and click [RUN TESTS].";
-      }
-
-      function runTests(){
-        const task = PATCH.coding.tasks[PATCH.coding.currentTask];
-        const ed = document.getElementById("coding-editor");
-        const out = document.getElementById("coding-output");
-        if(!task || !ed || !out) return;
-
-        PATCH.coding.attempts++;
-
-        const code = ed.value;
-        const module = { exports:{} };
-        const exports = module.exports;
-
-        try{
-          const fn = new Function("module","exports", code + "\n;return module.exports;");
-          const api = fn(module, exports) || module.exports;
-
-          task.tests(api);
-
-          PATCH.coding.solved = Math.min(PATCH.coding.tasks.length, PATCH.coding.solved + (PATCH.coding.lastResult === task.id ? 0 : 1));
-          PATCH.coding.lastResult = task.id;
-
-          out.textContent = `✅ PASS\nSolved: ${PATCH.coding.solved}/${PATCH.coding.tasks.length}\nAttempts: ${PATCH.coding.attempts}`;
-          try{ playTone(820, "square", 0.08); playTone(980, "square", 0.08); }catch(e){}
-          window.__toast && window.__toast("TESTS", "PASS ✅", 1200);
-
-        } catch(err){
-          out.textContent = `❌ FAIL\n${String(err && err.message ? err.message : err)}`;
-          try{ playTone(180, "sawtooth", 0.15); }catch(e){}
-          window.__toast && window.__toast("TESTS", "FAIL ❌", 1200);
-        }
-      }
-
-      // ----------------------------
-      // Command palette (Ctrl/⌘+K)
-      // ----------------------------
-      function ensureCommandPalette(){
-        if(document.getElementById("cmdk")) return;
-        const el = document.createElement("div");
-        el.id = "cmdk";
-        el.style.cssText = `
-          position:fixed; inset:0; z-index:9997; display:none;
-          background:rgba(0,0,0,0.62); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
-          align-items:flex-start; justify-content:center; padding-top:9vh;
-        `;
-        el.innerHTML = `
-          <div class="glass-panel" style="width:min(720px, 92vw); border-radius:16px; padding:14px;">
-            <div class="mono" style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--neon-cyan); opacity:0.9;">>> COMMAND PALETTE</div>
-            <input id="cmdk-input" class="mono" style="
-              width:100%; margin-top:10px; padding:12px; border-radius:12px;
-              background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.12);
-              outline:none; color:#fff; font-size:12px;
-            " placeholder="type: theme cyan | persona mira | lang ro | export | console | clear" />
-            <div id="cmdk-hint" class="mono" style="margin-top:10px; font-size:10px; opacity:0.65;">
-              Commands: theme [cyan/red/green/amber/white] · persona [herman/vex/aegis/mira/nyx] · lang [en/ru/ro/uk/es/fr/de] · console · export · clear
-            </div>
-          </div>
-        `;
-        document.body.appendChild(el);
-
-        function open(){
-          el.style.display = "flex";
-          gsap.fromTo(el.firstElementChild, {opacity:0, y:-10, scale:0.98}, {opacity:1, y:0, scale:1, duration:0.22, ease:"power2.out"});
-          setTimeout(()=>$("#cmdk-input")?.focus(), 30);
-        }
-        function close(){
-          gsap.to(el.firstElementChild, {opacity:0, y:-8, scale:0.98, duration:0.18, ease:"power2.in", onComplete:()=>{
-            el.style.display = "none";
-          }});
-        }
-
-        el.addEventListener("click", (e)=>{ if(e.target === el) close(); });
-
-        document.addEventListener("keydown", (e)=>{
-          const isK = e.key.toLowerCase() === "k";
-          if((e.ctrlKey || e.metaKey) && isK){
-            e.preventDefault();
-            if(el.style.display === "flex") close();
-            else open();
-          }
-          if(e.key === "Escape" && el.style.display === "flex") close();
-        });
-
-        $("#cmdk-input").addEventListener("keydown", (e)=>{
-          if(e.key === "Enter"){
-            const raw = e.target.value.trim();
-            e.target.value = "";
-            handleCommand(raw);
-            close();
-          }
-          if(e.key === "Escape") close();
-        });
-
-        function handleCommand(raw){
-          const parts = raw.split(/\s+/).filter(Boolean);
-          const cmd = (parts[0] || "").toLowerCase();
-          const arg = (parts[1] || "").toLowerCase();
-
-          if(cmd === "theme" && typeof window.setTheme === "function"){
-            window.setTheme(arg || "cyan");
-            window.__toast && window.__toast("CMD", `Theme -> ${arg||"cyan"}`, 1400);
-            return;
-          }
-          if(cmd === "persona"){
-            window.__selectedPersona = arg || "herman";
-            window.__toast && window.__toast("CMD", `Persona -> ${window.__selectedPersona}`, 1400);
-            return;
-          }
-          if(cmd === "lang" && typeof window.setLanguage === "function"){
-            window.setLanguage(arg || "en");
-            return;
-          }
-          if(cmd === "console"){
-            openCodingConsole();
-            return;
-          }
-          if(cmd === "export"){
-            exportSession();
-            return;
-          }
-          if(cmd === "clear"){
-            try{ localStorage.removeItem("anterview.sessions"); }catch(e){}
-            window.__toast && window.__toast("CMD", "Saved sessions cleared.", 1400);
-            return;
-          }
-
-          window.__toast && window.__toast("CMD", "Unknown command.", 1400);
-        }
-      }
-
-      // ----------------------------
-      // Session saving + export
-      // ----------------------------
-      function snapshotSession(){
-        return {
-          v: PATCH.version,
-          at: new Date().toISOString(),
-          persona: window.__selectedPersona || "herman",
-          lang: PATCH.interviewLang,
-          stress: (typeof window.stress === "number" ? window.stress : null),
-          theoryScore: PATCH.theoryScore,
-          coding: PATCH.coding,
-          history: Array.isArray(window.history) ? window.history : null
-        };
-      }
-
-      function saveSession(){
-        try{
-          const key = "anterview.sessions";
-          const list = JSON.parse(localStorage.getItem(key) || "[]");
-          list.unshift(snapshotSession());
-          localStorage.setItem(key, JSON.stringify(list.slice(0, 20)));
-          PATCH.saved = true;
-        }catch(e){}
-      }
-
-      function exportSession(){
-        const data = snapshotSession();
-        const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "anterview_session.json";
-        a.click();
-        setTimeout(()=>URL.revokeObjectURL(url), 1000);
-        window.__toast && window.__toast("EXPORT", "Session JSON downloaded.", 1600);
-      }
-
-      // ----------------------------
-      // Wrap initInterview to apply patched prompt
-      // ----------------------------
-      function patchInitInterview(){
-        if(typeof window.initInterview !== "function" || window.initInterview.__patched) return;
-        const _init = window.initInterview;
-        window.initInterview = function(){
-          const r = _init();
-          try{
-            // force first system message to include patched buildPrompt
-            if(Array.isArray(window.history) && window.history[0] && window.history[0].role === "system"){
-              const job = document.getElementById("job-title")?.value || "Engineer";
-              const stack = document.getElementById("stack")?.value || "General";
-              window.history[0].content = window.buildPrompt(job, stack);
-            }
-          }catch(e){}
-          return r;
-        };
-        window.initInterview.__patched = true;
-      }
-
-      // ----------------------------
-      // Wrap sendMsg: compute stress from signals + auto-open coding console
-      // ----------------------------
-      function patchSendMsg(){
-        if(typeof window.sendMsg !== "function" || window.sendMsg.__patched) return;
-        const _send = window.sendMsg;
-
-        window.sendMsg = async function(){
-          const input = document.getElementById("user-input");
-          const txt = input ? input.value.trim() : "";
-          const meta = input && input.__getKpmMeta ? input.__getKpmMeta() : {kpm:0, backRate:0};
-          const sig = analyzeCandidateText(txt);
-
-          if(txt){
-            updateTheoryChecklist(sig);
-            const d = computeStressDelta(meta, sig);
-            // override your random stress update by applying a compensating update right after send
-            setTimeout(()=>{
-              try{
-                if(typeof window.updateStress === "function") window.updateStress(d);
-              }catch(e){}
-            }, 0);
-
-            PATCH.msgMeta.push({ at: now(), txtLen: sig.len, words: sig.words, ...meta, ...sig, stressDelta: d, theoryScore: PATCH.theoryScore });
-
-            // If theory is complete and console not opened, prime the next AI question to be coding-related
-            if(theoryComplete() && !PATCH.consoleOpened){
-              PATCH.consoleOpened = true;
-              setTimeout(()=> openCodingConsole(), 650);
-            }
-          }
-
-          const r = await _send();
-          autoScrollMaybe();
-          return r;
-        };
-        window.sendMsg.__patched = true;
-      }
-
-      // ----------------------------
-      // Patch callAI: make sure prompt is updated + capture assistant meta
-      // ----------------------------
-      function patchCallAI(){
-        if(typeof window.callAI !== "function" || window.callAI.__patched) return;
-        const _call = window.callAI;
-
-        window.callAI = async function(msg){
-          try{
-            if(Array.isArray(window.history) && window.history[0] && window.history[0].role === "system"){
-              const job = document.getElementById("job-title")?.value || "Engineer";
-              const stack = document.getElementById("stack")?.value || "General";
-              window.history[0].content = window.buildPrompt(job, stack);
-            }
-          }catch(e){}
-
-          const t0 = now();
-          const r = await _call(msg);
-
-          try{
-            PATCH.aiMeta.push({ at: now(), dtMs: now()-t0 });
-          }catch(e){}
-
-          return r;
-        };
-        window.callAI.__patched = true;
-      }
-
-      // ----------------------------
-      // Patch endGame/generateReport: boost score from coding + show rubric block
-      // ----------------------------
-      function patchGenerateReport(){
-        if(typeof window.generateReport !== "function" || window.generateReport.__patched) return;
-        const _gen = window.generateReport;
-
-        window.generateReport = async function(){
-          const r = await _gen();
-
-          try{
-            const mount = document.getElementById("patch-results");
-            if(mount){
-              const theory = PATCH.theoryScore;
-              const solved = PATCH.coding.solved || 0;
-              const total = PATCH.coding.tasks.length || 0;
-              const attempts = PATCH.coding.attempts || 0;
-
-              mount.innerHTML = `
-                <div class="p-4 bg-white/5 rounded border border-white/5">
-                  <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Patch Metrics</div>
-                  <div class="mono text-[10px] text-slate-300 space-y-1">
-                    <div>> Theory Signals: ${theory}/7</div>
-                    <div>> Coding: ${solved}/${total} solved (attempts: ${attempts})</div>
-                    <div>> Telemetry: keys=${PATCH.keyCount}, backspaces=${PATCH.backspaces}, pastes=${PATCH.pasteCount}, focusLost=${PATCH.focusLost}</div>
-                  </div>
-                </div>
-              `;
-            }
-
-            // boost final score visually (no destructive changes; just add a tiny bonus)
-            const solvedRatio = (PATCH.coding.tasks.length ? (PATCH.coding.solved / PATCH.coding.tasks.length) : 0);
-            const bonus = Math.round(solvedRatio * 12); // up to +12%
-            const scoreEl = document.getElementById("final-score");
-            if(scoreEl){
-              const cur = parseInt(String(scoreEl.textContent||"0").replace(/\D/g,"")) || 0;
-              const boosted = clamp(cur + bonus, 0, 100);
-              scoreEl.textContent = boosted + "%";
-              window.__toast && window.__toast("BONUS", `Coding bonus +${bonus}%`, 1800);
-            }
-
-            saveSession();
-          }catch(e){}
-
-          return r;
-        };
-        window.generateReport.__patched = true;
-      }
-
-      // ----------------------------
-      // Dev console safety: lockout after multiple wrong attempts (does not remove your codes)
-      // ----------------------------
-      function patchDevConsoleLockout(){
-        const input = document.getElementById("dev-password-input");
-        const err = document.getElementById("dev-error");
-        if(!input || input.__lockoutPatched) return;
-        input.__lockoutPatched = true;
-
-        let fails = 0;
-        let lockedUntil = 0;
-
-        input.addEventListener("keypress", (e)=>{
-          if(e.key !== "Enter") return;
-          if(now() < lockedUntil){
-            if(err) err.style.display = "block";
-            try{ window.__toast && window.__toast("LOCKOUT", "Too many failed attempts. Wait 10s.", 1600); }catch(e){}
-            e.preventDefault();
-            return;
-          }
-          setTimeout(()=>{
-            // if error visible -> count fail
-            if(err && err.style.display !== "none"){
-              fails++;
-              if(fails >= 4){
-                lockedUntil = now() + 10000;
-                fails = 0;
-                try{ window.__toast && window.__toast("LOCKOUT", "Console locked for 10 seconds.", 1600); }catch(e){}
-              }
-            } else {
-              fails = 0;
-            }
-          }, 0);
-        });
-      }
-
-      // ----------------------------
-      // Boot
-      // ----------------------------
-      function boot(){
-        initAutoScrollLock();
-        initTelemetry();
-        safeRenderBubbles();
-        safeRenderTypewriter();
-        ensureCommandPalette();
-        patchInitInterview();
-        patchSendMsg();
-        patchCallAI();
-        patchGenerateReport();
-        patchDevConsoleLockout();
-      }
-
-      if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-      else boot();
-    })();
-    </script>
-
-    <div id="voice-uplink" class="fixed bottom-32 right-6 z-50 hidden md:block">
-    <style>
-        .voice-panel {
-            background: rgba(5, 5, 5, 0.9);
-            border: 1px solid #333;
-            border-left: 4px solid var(--neon-amber);
-            padding: 12px;
-            width: 140px;
-            backdrop-filter: blur(10px);
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 85% 100%, 0 100%);
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-            transition: all 0.3s;
-        }
-        
-        .hazard-stripes {
-            height: 8px;
-            width: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                #333,
-                #333 5px,
-                var(--neon-amber) 5px,
-                var(--neon-amber) 10px
-            );
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-
-        .lever-track {
-            width: 40px;
-            height: 80px;
-            background: #111;
-            border: 1px solid #444;
-            margin: 0 auto;
-            position: relative;
-            border-radius: 4px;
-            box-shadow: inset 0 0 10px #000;
-        }
-
-        .lever-handle {
-            width: 100%;
-            height: 40px;
-            background: #444;
-            border: 1px solid #666;
-            position: absolute;
-            top: 0; /* 0 = OFF, 40px = ON */
-            left: 0;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: top 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045); /* Heavy feel */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        
-        .lever-handle::after {
-            content: "";
-            width: 20px;
-            height: 2px;
-            background: #222;
-            box-shadow: 0 2px 0 #666;
-        }
-
-        .lever-handle.active {
-            top: 40px;
-            background: var(--neon-cyan);
-            border-color: #fff;
-            box-shadow: 0 0 20px var(--neon-cyan);
-            transition: top 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Snap feel */
-        }
-
-        .status-led {
-            width: 8px;
-            height: 8px;
-            background: #333;
-            border-radius: 50%;
-            margin: 10px auto 0;
-            box-shadow: 0 0 0 2px #111;
-            transition: 0.2s;
-        }
-        .status-led.on { background: var(--neon-cyan); box-shadow: 0 0 10px var(--neon-cyan); }
-        .status-led.error { background: var(--neon-pink); box-shadow: 0 0 10px var(--neon-pink); }
-
-        .testing-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: var(--neon-pink);
-            color: #fff;
-            font-size: 8px;
-            font-weight: 800;
-            padding: 2px 6px;
-            transform: rotate(5deg);
-            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
-            border: 1px solid #fff;
-        }
-    </style>
-
-    <div class="voice-panel">
-        <div class="testing-badge">BETA</div>
-        <div class="hazard-stripes"></div>
-        
-        <div class="text-[9px] mono text-slate-400 text-center mb-2 tracking-widest">VOICE_LINK</div>
-        
-        <div class="lever-track" onclick="toggleVoice()">
-            <div id="lever" class="lever-handle"></div>
-        </div>
-
-        <div id="voice-led" class="status-led"></div>
-        <div id="voice-status" class="text-[8px] mono text-center mt-2 text-slate-600">OFFLINE</div>
-    </div>
-
-    <script>
-    (function(){
-        const Speech = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const lever = document.getElementById('lever');
-        const led = document.getElementById('voice-led');
-        const label = document.getElementById('voice-status');
-        let recognition = null;
-        let isListening = false;
-
-        if(!Speech) {
-            label.innerText = "UNSUPPORTED";
-            label.style.color = "var(--neon-pink)";
-            return;
-        }
-
-        recognition = new Speech();
-        recognition.continuous = true;
-        recognition.interimResults = true;
-        recognition.lang = 'en-US';
-
-        recognition.onstart = function() {
-            isListening = true;
-            label.innerText = "LISTENING";
-            label.style.color = "var(--neon-cyan)";
-            led.className = "status-led on";
-            playTone(800, 'sine', 0.1);
-        };
-
-        recognition.onend = function() {
-            if(isListening) recognition.start(); // Auto-restart if we didn't stop it manually
-            else {
-                label.innerText = "TERMINATED";
-                label.style.color = "#64748b";
-                led.className = "status-led";
-            }
-        };
-
-        recognition.onresult = function(event) {
-            const input = document.getElementById('user-input');
-            let final = "";
-            let interim = "";
-
-            for (let i = event.resultIndex; i < event.results.length; ++i) {
-                if (event.results[i].isFinal) {
-                    final += event.results[i][0].transcript;
-                } else {
-                    interim += event.results[i][0].transcript;
-                }
-            }
-
-            if(input) {
-                // If we have final text, append it. If just interim, show it tentatively.
-                // For simplicity in this demo, we just overwrite/append to input
-                if(final) {
-                    input.value = input.value ? input.value + " " + final : final;
-                    // Optional: Auto-send if they say "send"
-                    if(final.toLowerCase().includes("send message")) {
-                        input.value = input.value.replace(/send message/i, "");
-                        window.sendMsg();
-                    }
-                }
-            }
-        };
-
-        recognition.onerror = function(event) {
-            console.error(event.error);
-            led.className = "status-led error";
-            playTone(150, 'sawtooth', 0.3);
-        };
-
-        window.toggleVoice = function() {
-            if(!recognition) return;
-
-            if(isListening) {
-                // Turn OFF
-                isListening = false;
-                recognition.stop();
-                lever.classList.remove('active');
-                playTone(200, 'sawtooth', 0.1); // Power down sound
-            } else {
-                // Turn ON
-                try {
-                    recognition.start();
-                    lever.classList.add('active');
-                    playTone(600, 'square', 0.05); // Mechanical click
-                    setTimeout(() => playTone(400, 'square', 0.1), 50);
-                } catch(e) { console.log(e); }
-            }
-        };
-    })();
-    </script>
+tests:(api)=>{
+const { TokenBucket } = api;
+if(typeof TokenBucket !== "function") throw new Error("TokenBucket missing");
+const b = new TokenBucket(2, 1000); // super fast refill
+if(!b.allow()) throw new Error("first should allow");
+if(!b.allow()) throw new Error("second should allow");
+// third may allow due to refill; force no refill by setting last to now
+b.last = Date.now();
+b.tokens = 0;
+if(b.allow() !== false) throw new Error("should block when empty and no time passed");
+return true;
+}
+}
+];
+}
+
+function openCodingConsole(){
+ensureCodingUI();
+const panel = document.getElementById("coding-console");
+if(!panel) return;
+PATCH.consoleOpened = true;
+panel.style.pointerEvents = "auto";
+gsap.to(panel, {x:0, duration:0.5, ease:"power3.out"});
+window.__toast && window.__toast("CODING", "Console opened. Pass tests to boost score.", 2000);
+}
+
+function closeCodingConsole(){
+const panel = document.getElementById("coding-console");
+if(!panel) return;
+gsap.to(panel, {x:"105%", duration:0.42, ease:"power3.in", onComplete:()=>{
+panel.style.pointerEvents = "none";
+}});
+}
+
+function renderTask(){
+const task = PATCH.coding.tasks[PATCH.coding.currentTask];
+const taskBox = document.getElementById("coding-task");
+const ed = document.getElementById("coding-editor");
+const out = document.getElementById("coding-output");
+if(!taskBox || !ed || !out) return;
+
+taskBox.innerHTML = `
+<div style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+<div>
+<div class="mono" style="font-size:12px; font-weight:800; letter-spacing:-0.01em;">${escapeHTML(task.title)}</div>
+<div class="mono" style="font-size:10px; opacity:0.75; margin-top:6px;">${task.prompt}</div>
 </div>
+<div class="mono" style="font-size:10px; opacity:0.7;">TASK ${PATCH.coding.currentTask+1}/${PATCH.coding.tasks.length}</div>
+</div>
+`;
+ed.value = task.template;
+out.textContent = "Ready. Implement and click [RUN TESTS].";
+}
+
+function runTests(){
+const task = PATCH.coding.tasks[PATCH.coding.currentTask];
+const ed = document.getElementById("coding-editor");
+const out = document.getElementById("coding-output");
+if(!task || !ed || !out) return;
+
+PATCH.coding.attempts++;
+
+const code = ed.value;
+const module = { exports:{} };
+const exports = module.exports;
+
+try{
+const fn = new Function("module","exports", code + "\n;return module.exports;");
+const api = fn(module, exports) || module.exports;
+
+task.tests(api);
+
+PATCH.coding.solved = Math.min(PATCH.coding.tasks.length, PATCH.coding.solved + (PATCH.coding.lastResult === task.id ? 0 : 1));
+PATCH.coding.lastResult = task.id;
+
+out.textContent = `✅ PASS\nSolved: ${PATCH.coding.solved}/${PATCH.coding.tasks.length}\nAttempts: ${PATCH.coding.attempts}`;
+try{ playTone(820, "square", 0.08); playTone(980, "square", 0.08); }catch(e){}
+window.__toast && window.__toast("TESTS", "PASS ✅", 1200);
+
+} catch(err){
+out.textContent = `❌ FAIL\n${String(err && err.message ? err.message : err)}`;
+try{ playTone(180, "sawtooth", 0.15); }catch(e){}
+window.__toast && window.__toast("TESTS", "FAIL ❌", 1200);
+}
+}
+
+// ----------------------------
+// Command palette (Ctrl/⌘+K)
+// ----------------------------
+function ensureCommandPalette(){
+if(document.getElementById("cmdk")) return;
+const el = document.createElement("div");
+el.id = "cmdk";
+el.style.cssText = `
+position:fixed; inset:0; z-index:9997; display:none;
+background:rgba(0,0,0,0.62); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+align-items:flex-start; justify-content:center; padding-top:9vh;
+`;
+el.innerHTML = `
+<div class="glass-panel" style="width:min(720px, 92vw); border-radius:16px; padding:14px;">
+<div class="mono" style="font-size:10px; letter-spacing:0.22em; text-transform:uppercase; color:var(--neon-cyan); opacity:0.9;">>> COMMAND PALETTE</div>
+<input id="cmdk-input" class="mono" style="
+width:100%; margin-top:10px; padding:12px; border-radius:12px;
+background:rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.12);
+outline:none; color:#fff; font-size:12px;
+" placeholder="type: theme cyan | persona mira | lang ro | export | console | clear" />
+<div id="cmdk-hint" class="mono" style="margin-top:10px; font-size:10px; opacity:0.65;">
+Commands: theme [cyan/red/green/amber/white] · persona [herman/vex/aegis/mira/nyx] · lang [en/ru/ro/uk/es/fr/de] · console · export · clear
+</div>
+</div>
+`;
+document.body.appendChild(el);
+
+function open(){
+el.style.display = "flex";
+gsap.fromTo(el.firstElementChild, {opacity:0, y:-10, scale:0.98}, {opacity:1, y:0, scale:1, duration:0.22, ease:"power2.out"});
+setTimeout(()=>$("#cmdk-input")?.focus(), 30);
+}
+function close(){
+gsap.to(el.firstElementChild, {opacity:0, y:-8, scale:0.98, duration:0.18, ease:"power2.in", onComplete:()=>{
+el.style.display = "none";
+}});
+}
+
+el.addEventListener("click", (e)=>{ if(e.target === el) close(); });
+
+document.addEventListener("keydown", (e)=>{
+const isK = e.key.toLowerCase() === "k";
+if((e.ctrlKey || e.metaKey) && isK){
+e.preventDefault();
+if(el.style.display === "flex") close();
+else open();
+}
+if(e.key === "Escape" && el.style.display === "flex") close();
+});
+
+$("#cmdk-input").addEventListener("keydown", (e)=>{
+if(e.key === "Enter"){
+const raw = e.target.value.trim();
+e.target.value = "";
+handleCommand(raw);
+close();
+}
+if(e.key === "Escape") close();
+});
+
+function handleCommand(raw){
+const parts = raw.split(/\s+/).filter(Boolean);
+const cmd = (parts[0] || "").toLowerCase();
+const arg = (parts[1] || "").toLowerCase();
+
+if(cmd === "theme" && typeof window.setTheme === "function"){
+window.setTheme(arg || "cyan");
+window.__toast && window.__toast("CMD", `Theme -> ${arg||"cyan"}`, 1400);
+return;
+}
+if(cmd === "persona"){
+window.__selectedPersona = arg || "herman";
+window.__toast && window.__toast("CMD", `Persona -> ${window.__selectedPersona}`, 1400);
+return;
+}
+if(cmd === "lang" && typeof window.setLanguage === "function"){
+window.setLanguage(arg || "en");
+return;
+}
+if(cmd === "console"){
+openCodingConsole();
+return;
+}
+if(cmd === "export"){
+exportSession();
+return;
+}
+if(cmd === "clear"){
+try{ localStorage.removeItem("anterview.sessions"); }catch(e){}
+window.__toast && window.__toast("CMD", "Saved sessions cleared.", 1400);
+return;
+}
+
+window.__toast && window.__toast("CMD", "Unknown command.", 1400);
+}
+}
+
+// ----------------------------
+// Session saving + export
+// ----------------------------
+function snapshotSession(){
+return {
+v: PATCH.version,
+at: new Date().toISOString(),
+persona: window.__selectedPersona || "herman",
+lang: PATCH.interviewLang,
+stress: (typeof window.stress === "number" ? window.stress : null),
+theoryScore: PATCH.theoryScore,
+coding: PATCH.coding,
+history: Array.isArray(window.history) ? window.history : null
+};
+}
+
+function saveSession(){
+try{
+const key = "anterview.sessions";
+const list = JSON.parse(localStorage.getItem(key) || "[]");
+list.unshift(snapshotSession());
+localStorage.setItem(key, JSON.stringify(list.slice(0, 20)));
+PATCH.saved = true;
+}catch(e){}
+}
+
+function exportSession(){
+const data = snapshotSession();
+const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
+const url = URL.createObjectURL(blob);
+const a = document.createElement("a");
+a.href = url;
+a.download = "anterview_session.json";
+a.click();
+setTimeout(()=>URL.revokeObjectURL(url), 1000);
+window.__toast && window.__toast("EXPORT", "Session JSON downloaded.", 1600);
+}
+
+// ----------------------------
+// Wrap initInterview to apply patched prompt
+// ----------------------------
+function patchInitInterview(){
+if(typeof window.initInterview !== "function" || window.initInterview.__patched) return;
+const _init = window.initInterview;
+window.initInterview = function(){
+const r = _init();
+try{
+// force first system message to include patched buildPrompt
+if(Array.isArray(window.history) && window.history[0] && window.history[0].role === "system"){
+const job = document.getElementById("job-title")?.value || "Engineer";
+const stack = document.getElementById("stack")?.value || "General";
+window.history[0].content = window.buildPrompt(job, stack);
+}
+}catch(e){}
+return r;
+};
+window.initInterview.__patched = true;
+}
+
+// ----------------------------
+// Wrap sendMsg: compute stress from signals + auto-open coding console
+// ----------------------------
+function patchSendMsg(){
+if(typeof window.sendMsg !== "function" || window.sendMsg.__patched) return;
+const _send = window.sendMsg;
+
+window.sendMsg = async function(){
+const input = document.getElementById("user-input");
+const txt = input ? input.value.trim() : "";
+const meta = input && input.__getKpmMeta ? input.__getKpmMeta() : {kpm:0, backRate:0};
+const sig = analyzeCandidateText(txt);
+
+if(txt){
+updateTheoryChecklist(sig);
+const d = computeStressDelta(meta, sig);
+// override your random stress update by applying a compensating update right after send
+setTimeout(()=>{
+try{
+if(typeof window.updateStress === "function") window.updateStress(d);
+}catch(e){}
+}, 0);
+
+PATCH.msgMeta.push({ at: now(), txtLen: sig.len, words: sig.words, ...meta, ...sig, stressDelta: d, theoryScore: PATCH.theoryScore });
+
+// If theory is complete and console not opened, prime the next AI question to be coding-related
+if(theoryComplete() && !PATCH.consoleOpened){
+PATCH.consoleOpened = true;
+setTimeout(()=> openCodingConsole(), 650);
+}
+}
+
+const r = await _send();
+autoScrollMaybe();
+return r;
+};
+window.sendMsg.__patched = true;
+}
+
+// ----------------------------
+// Patch callAI: make sure prompt is updated + capture assistant meta
+// ----------------------------
+function patchCallAI(){
+if(typeof window.callAI !== "function" || window.callAI.__patched) return;
+const _call = window.callAI;
+
+window.callAI = async function(msg){
+try{
+if(Array.isArray(window.history) && window.history[0] && window.history[0].role === "system"){
+const job = document.getElementById("job-title")?.value || "Engineer";
+const stack = document.getElementById("stack")?.value || "General";
+window.history[0].content = window.buildPrompt(job, stack);
+}
+}catch(e){}
+
+const t0 = now();
+const r = await _call(msg);
+
+try{
+PATCH.aiMeta.push({ at: now(), dtMs: now()-t0 });
+}catch(e){}
+
+return r;
+};
+window.callAI.__patched = true;
+}
+
+// ----------------------------
+// Patch endGame/generateReport: boost score from coding + show rubric block
+// ----------------------------
+function patchGenerateReport(){
+if(typeof window.generateReport !== "function" || window.generateReport.__patched) return;
+const _gen = window.generateReport;
+
+window.generateReport = async function(){
+const r = await _gen();
+
+try{
+const mount = document.getElementById("patch-results");
+if(mount){
+const theory = PATCH.theoryScore;
+const solved = PATCH.coding.solved || 0;
+const total = PATCH.coding.tasks.length || 0;
+const attempts = PATCH.coding.attempts || 0;
+
+mount.innerHTML = `
+<div class="p-4 bg-white/5 rounded border border-white/5">
+<div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Patch Metrics</div>
+<div class="mono text-[10px] text-slate-300 space-y-1">
+<div>> Theory Signals: ${theory}/7</div>
+<div>> Coding: ${solved}/${total} solved (attempts: ${attempts})</div>
+<div>> Telemetry: keys=${PATCH.keyCount}, backspaces=${PATCH.backspaces}, pastes=${PATCH.pasteCount}, focusLost=${PATCH.focusLost}</div>
+</div>
+</div>
+`;
+}
+
+// boost final score visually (no destructive changes; just add a tiny bonus)
+const solvedRatio = (PATCH.coding.tasks.length ? (PATCH.coding.solved / PATCH.coding.tasks.length) : 0);
+const bonus = Math.round(solvedRatio * 12); // up to +12%
+const scoreEl = document.getElementById("final-score");
+if(scoreEl){
+const cur = parseInt(String(scoreEl.textContent||"0").replace(/\D/g,"")) || 0;
+const boosted = clamp(cur + bonus, 0, 100);
+scoreEl.textContent = boosted + "%";
+window.__toast && window.__toast("BONUS", `Coding bonus +${bonus}%`, 1800);
+}
+
+saveSession();
+}catch(e){}
+
+return r;
+};
+window.generateReport.__patched = true;
+}
+
+// ----------------------------
+// Dev console safety: lockout after multiple wrong attempts (does not remove your codes)
+// ----------------------------
+function patchDevConsoleLockout(){
+const input = document.getElementById("dev-password-input");
+const err = document.getElementById("dev-error");
+if(!input || input.__lockoutPatched) return;
+input.__lockoutPatched = true;
+
+let fails = 0;
+let lockedUntil = 0;
+
+input.addEventListener("keypress", (e)=>{
+if(e.key !== "Enter") return;
+if(now() < lockedUntil){
+if(err) err.style.display = "block";
+try{ window.__toast && window.__toast("LOCKOUT", "Too many failed attempts. Wait 10s.", 1600); }catch(e){}
+e.preventDefault();
+return;
+}
+setTimeout(()=>{
+// if error visible -> count fail
+if(err && err.style.display !== "none"){
+fails++;
+if(fails >= 4){
+lockedUntil = now() + 10000;
+fails = 0;
+try{ window.__toast && window.__toast("LOCKOUT", "Console locked for 10 seconds.", 1600); }catch(e){}
+}
+} else {
+fails = 0;
+}
+}, 0);
+});
+}
+
+// ----------------------------
+// Boot
+// ----------------------------
+function boot(){
+initAutoScrollLock();
+initTelemetry();
+safeRenderBubbles();
+safeRenderTypewriter();
+ensureCommandPalette();
+patchInitInterview();
+patchSendMsg();
+patchCallAI();
+patchGenerateReport();
+patchDevConsoleLockout();
+}
+
+if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+else boot();
+})();
+</script>
 
 
-    
+
 </body>
 </html>
-
